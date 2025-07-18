@@ -1,0 +1,160 @@
+/***
+ *    ┓ ┏┏┓┓┏┳┓┏┓┳┓  ┏┓┏┳┓┓┏┓ ┏┓
+ *    ┃┃┃┣┫┗┫┣┫┣┫┣┫━━┗┓ ┃ ┗┫┃ ┣ 
+ *    ┗┻┛┛┗┗┛┻┛┛┗┛┗  ┗┛ ┻ ┗┛┗┛┗┛
+ *                              
+ */
+
+/*-----------------Source pywal colors----------------*/
+@import url('../../.cache/wal/colors-waybar.css');
+
+/*------------Defining Colors---------------*/
+@define-color background-alt 	@color8;
+@define-color foreground-alt 	@background;
+@define-color red 		@color9;
+@define-color green 		@color10;
+@define-color yellow 		@color11;
+@define-color blue 		@color12;
+@define-color magenta 		@color13;
+@define-color cyan 		@color14;
+
+* {
+    font-family: Iosevka Nerd Font Propo;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+window#waybar {
+    background-color: @background;
+    color: @foreground;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+window#waybar.termite {
+    background-color: @background;
+}
+
+window#waybar.chromium {
+    background-color: @background;
+    border: none;
+}
+
+button {
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+
+#workspaces button:hover {
+    color: @magenta;
+    box-shadow: inherit;
+    text-shadow: inherit;
+    background: @crust;
+    border: @crust;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    color: @background-alt;
+    margin: 4px 0 4px 6px;
+    transition: color 200ms ease-in-out;
+}
+
+
+#workspaces button.active {
+    color: @blue;
+}
+
+#workspaces button.urgent {
+    color: @red;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-power,
+#custom-pacman,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd {
+    padding: 0 9px;
+    color: @foreground;
+    border-radius: 15px;
+    margin: 5px 0;
+}
+
+
+#custom-pacman {
+    color: @yellow;
+}
+
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, reduce left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 2px;
+}
+
+#clock {
+  color: @magenta;
+}
+
+
+
+#pulseaudio.muted {
+  color: @red;
+}
+
+
+#network.disconnected {
+  color: @red;
+}
+
+#battery {
+    color: @green;
+}
+
+#battery.warning:not(.charging) {
+    color: @red;
+}
+
+tooltip {
+  background-color: @background;
+  border: 2px solid @blue;
+}
+
+tooltip label {
+  color: @foreground;
+}

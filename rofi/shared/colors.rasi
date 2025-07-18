@@ -1,0 +1,25 @@
+/***
+ *    ┏┓┏┓┓ ┏┓┳┓┏┓
+ *    ┃ ┃┃┃ ┃┃┣┫┗┓
+ *    ┗┛┗┛┗┛┗┛┛┗┗┛
+ *                
+ */
+
+/*--------Source pywal colors----------*/
+@import	"~/.cache/wal/colors-rofi.rasi"
+
+/*--------Color definitions------------*/
+
+* {
+       background:       	@bg;
+       background-alpha: 	@bg-alpha;
+       background-alt:   	@bg-alt;
+       background-alt-alpha:    @bg-alt-alpha;
+       foreground:       	@fg;
+       border-color:     	@border;
+       selected:         	@selected-color;
+       selected-alpha:   	@selected-color-alpha;
+       selected-text:    	@selected-text-color;
+       active:           	@active-color;
+       urgent:           	@urgent-color;
+}

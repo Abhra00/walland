@@ -1,0 +1,40 @@
+sw_volume: 100
+audio_device_state:1:PipeWire Sound Server
+audio_device_state:1:my_fifo
+state: play
+current: 2
+time: 120.175
+random: 0
+repeat: 1
+single: 1
+consume: 0
+crossfade: 0
+mixrampdb: 0
+mixrampdelay: -1
+lastloadedplaylist: 
+playlist_begin
+song_begin: /tmp/rmpc/cache/youtube/6DtPF9W3ejI.opus
+Time: 259.98
+Title: Asim Azhar - Jo Tu Na Mila | Kunaal Vermaa
+Date: 20181120
+Artist: VYRLOriginals
+mtime: 1714497728
+added: 1714497728
+song_end
+song_begin: /tmp/rmpc/cache/youtube/8of5w7RgcTc.opus
+Time: 147.46
+Title: Afusic - Pal Pal (Official Music Video) Prod. @AliSoomroMusic
+Date: 20250218
+Artist: AFUSIC
+mtime: 1743390210
+added: 1743390210
+song_end
+song_begin: /tmp/rmpc/cache/youtube/_CWcBWSKItk.opus
+Time: 881.44
+Title: Radha Ramanam Hare Hare - Shri Indresh Upadhyay Ji | #BhaktipathAnthem
+Date: 20200330
+Artist: BhaktiPath
+mtime: 1708223400
+added: 1708223400
+song_end
+playlist_end

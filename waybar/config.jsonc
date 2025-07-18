@@ -1,0 +1,218 @@
+/***
+ *    ┓ ┏┏┓┓┏┳┓┏┓┳┓  ┏┓┏┓┳┓┏┓┳┏┓
+ *    ┃┃┃┣┫┗┫┣┫┣┫┣┫━━┃ ┃┃┃┃┣ ┃┃┓
+ *    ┗┻┛┛┗┗┛┻┛┛┗┛┗  ┗┛┗┛┛┗┻ ┻┗┛
+ *                              
+ */
+
+
+
+// -*- mode: jsonc -*-
+{
+  "layer": "top", // Waybar at top layer
+  "position": "top", // Waybar position (top|bottom|left|right)
+  "height": 40, // Waybar height (to be removed for auto height)
+  "spacing": 0, // Gaps between modules (4px)
+  "reload_style_on_change": true,
+  "modules-left": [
+    "clock",
+    "mpd",
+    "custom/pacman"
+  ],
+  "modules-center": [
+    "hyprland/workspaces"
+  ],
+  "modules-right": [
+    "memory",
+    "cpu",
+    "backlight",
+    "pulseaudio",
+    "network",
+    "battery",
+    "tray"
+  ],
+  // Modules configuration
+
+  "hyprland/workspaces": {
+    "format": "{id}.{icon}",
+    "format-icons": {
+      "1": "DEV",
+      "2": "DOC",
+      "3": "WEB",
+      "4": "IMG",
+      "5": "VFX",
+      "6": "SYS",
+      "7": "FUN",
+      "8": "CHAT",
+      "9": "MICS"
+    },
+    "all-outputs": true,
+    "persistent-workspaces": {}
+  },
+  "custom/pacman": {
+    "interval": 3600,
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/pacman-updates.sh",
+    "exec-if": "exit 0",
+    "on-click": "$TERMINAL -e paru; pkill -SIGRTMIN+8 waybar",
+    "signal": 8
+  },
+  "mpd": {
+    "format": " {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) :: {volume}%",
+    "format-disconnected": "Disconnected",
+    "format-stopped": " Stopped",
+    "unknown-tag": "N/A",
+    "title-len": 30,
+    "interval": 5,
+    "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e rmpc'",
+    "consume-icons": {
+      "off": "<span color=\"#15161e\"> </span> ",
+      "on": "<span color=\"#c0caf5\"> </span> "
+    },
+    "random-icons": {
+      "off": "<span color=\"#15161e\"> </span> ",
+      "on": "<span color=\"#c0caf5\"> </span> "
+    },
+    "repeat-icons": {
+      "off": "<span color=\"#15161e\"> </span> ",
+      "on": "<span color=\"#c0caf5\"> </span> "
+    },
+    "single-icons": {
+      "on": " 1",
+      "off": " 1"
+    },
+    "state-icons": {
+      "paused": " ",
+      "playing": " "
+    },
+    "tooltip": false,
+    "tooltip-format": "MPD (connected)",
+    "tooltip-format-disconnected": "MPD (disconnected)"
+  },
+  "tray": {
+    "tooltip": false,
+    "spacing": 10
+  },
+  "clock": {
+    "tooltip": true,
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "format" : "{:%d %b | %H:%M}",
+    "on-click": "ghostty -e calcurse &",
+    "actions":  {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    },
+    "calendar": {
+      "mode"          : "month",
+      "mode-mon-col"  : 3,
+      "weeks-pos"     : "left",
+      "on-scroll"     : 1,
+      "format": {
+        "months":     "<span color='#9ece6a'><b>{}</b></span>",
+        "days":       "<span color='#e0af68'><b>{}</b></span>",
+        "weeks":      "<span color='#7aa2f7'><b>W{}</b></span>",
+        "weekdays":   "<span color='#bb9af7'><b>{}</b></span>",
+        "today":      "<span color='#7dcfff'><b>{}</b></span>"
+      }
+    }
+  },
+  "cpu": {
+    "format": " {usage}%",
+    "tooltip": true
+  },
+  "memory": {
+    "format": " {}%"
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format": "{temperatureC}°C {icon}",
+    "format-icons": ["", "", ""]
+  },
+  "backlight": {
+    // "device": "acpi_video1",
+    "format": "{icon}{percent}%",
+    "format-icons": ["󱩏 ", "󱩑 ", "󱩓 ", "󱩕 "]
+  },
+  "battery": {
+    "states": {
+      "good": 95,
+      "warning": 30,
+      "critical": 15
+    },
+    "tooltip": false,
+    "format": "{icon}{capacity}%",
+    "format-full": "{icon}{capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{icon} {time}",
+    "format-icons": [
+      " ",
+      " ",
+      " ",
+      " ",
+      " "
+    ]
+  },
+  "battery#bat2": {
+    "bat": "BAT2"
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "tooltip": false,
+    "format-icons": {
+      "default": "",
+      "performance": "",
+      "balanced": " ",
+      "power-saver": " "
+    }
+  },
+  "network": {
+    "format-wifi": " {essid} ({signalStrength}%)",
+    "format-ethernet": "{ipaddr}/{cidr} ",
+    "tooltip": false,
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "format-linked": " {ifname} (No IP)",
+    "format-disconnected": " Disconnected",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "on-right-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e nmtui'"
+  },
+  "pulseaudio": {
+    // "scroll-step": 1, // %, can be a float
+    "format": "{icon}{volume}% {format_source}",
+    "format-bluetooth": "{icon}{volume}%  {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": " {volume}%",
+    "format-source-muted": " ",
+    "format-icons": {
+      "headphone": " ",
+      "headset": " ",
+      "default": [" ", " ", " "]
+    },
+    "on-click": "pavucontrol"
+  },
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 20,
+    "icon-theme": "Numix-Circle",
+    "markup": true,
+    "tooltip": false,
+    "tooltip-format": "{title} ({state}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": [
+      "Alacritty"
+    ],
+    "app_ids-mapping": {
+      "firefoxdeveloperedition": "firefox-developer-edition"
+    },
+    "rewrite": {
+      "Firefox Web Browser": "Firefox",
+      "Foot Server": "Terminal"
+    }
+  }
+}

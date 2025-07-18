@@ -1,0 +1,123 @@
+/***
+ *    ┓ ┏┓┳┳┳┓┏┓┓┏┏┓┳┓┏┓
+ *    ┃ ┣┫┃┃┃┃┃ ┣┫┣ ┣┫┏┛
+ *    ┗┛┛┗┗┛┛┗┗┛┛┗┗┛┛┗┗━
+ *                      
+ */
+
+
+
+
+configuration {
+    modi: "drun,run";
+    lines: 5;
+    show-icons: true;
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    sidebar-mode: true;
+    display-drun: "  Apps ";
+    display-run: "  Command ";
+    display-window: "  Window ";
+}
+
+
+/*****----- Global Properties -----*****/
+@import                          "~/.config/rofi/shared/colors.rasi"
+@import                          "~/.config/rofi/shared/fonts.rasi"
+
+
+element-text, element-icon , mode-switcher {
+    background-color: inherit;
+    text-color:       inherit;
+}
+
+window {
+    height: 400px;
+    width: 600px;
+    border: 0px;
+    border-radius: 0px;
+    border-color: @border-color;
+    background-color: @background;
+    padding: 0px 0px 0px 0px;
+    fullscreen: false;
+}
+
+mainbox {
+    background-color: @background;
+}
+
+inputbar {
+    children: [prompt,entry];
+    background-color: @background;
+    border-radius: 0px;
+    padding: 2px;
+}
+
+prompt {
+    background-color: @selected;
+    padding: 12px;
+    text-color: @background;
+    border-radius: 0px;
+    margin: 8px 0px 0px 8px;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+}
+
+entry {
+    padding: 6px;
+    margin: 14px 0px 0px 2.5px;
+    text-color: @foreground;
+    background-color: @background;
+}
+
+listview {
+    border: 0px 0px 0px;
+    margin: 7px 10px 0px 10px;
+    background-color: @background;
+    columns: 1;
+}
+
+element {
+    padding: 12px 12px 12px 12px;
+    background-color: @background;
+    text-color: @foreground;
+}
+
+element-icon {
+    size: 25px;
+}
+
+
+element-text {
+    vertical-align: 0.5;
+}
+
+element selected {
+    background-color:  @selected;
+    text-color: @selected-text;
+    border-radius: 0px;
+}
+
+mode-switcher {
+    spacing: 0;
+}
+
+button {
+    padding: 12px;
+    margin: 10px;
+    border-radius: 0px;
+    background-color: @background-alt;
+    text-color: @foreground;
+    vertical-align: 0.5; 
+    horizontal-align: 0.5;
+}
+
+button selected {
+  background-color: @selected;
+  text-color: @selected-text;
+}
