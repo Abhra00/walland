@@ -43,3 +43,7 @@ cp $HOME/.cache/wal/qtct-colors.conf $HOME/.config/qt6ct/colors/pywalqtcolors.co
 # Copy kvantum colors
 cp $HOME/.cache/wal/pywal.kvconfig $HOME/.config/Kvantum/pywal/pywal.kvconfig
 cp $HOME/.cache/wal/pywal.svg $HOME/.config/Kvantum/pywal/pywal.svg
+
+# Copy cava confing and reload  it
+cp $HOME/.cache/wal/colors-cava $HOME/.config/cava/config
+pkill -SIGUSR2 cava
