@@ -36,7 +36,7 @@ configuration {
     background-normal:           @background-alt-alpha;
     background-selected:         @selected-alpha;
     foreground-normal:           @foreground;
-    foreground-selected:         @foreground;
+    foreground-selected:         @selected-text;
 }
 
 /*****----- Main Window -----*****/
