@@ -66,13 +66,13 @@ fi
 
 # ---------- 2. Pacman cache trim ------------------------------------------
 announce "Pacman cache trim (keeping latest $PACCACHE_RETAIN)"
-current_cache=$(du -sh /var/cache/pacman/pkg | cut -f1)
+current_cache=$(sudo du -sh /var/cache/pacman/pkg | cut -f1)
 echo "Current cache: $current_cache"
 if confirm "Clean pacman cache now? [y/N]"; then
   sudo paccache -vrk$PACCACHE_RETAIN
   sudo paccache -ruk0
 fi
-new_cache=$(du -sh /var/cache/pacman/pkg | cut -f1)
+new_cache=$(sudo du -sh /var/cache/pacman/pkg | cut -f1)
 echo "Cache after trim: $new_cache"
 
 # ---------- 3. Orphaned packages ------------------------------------------
