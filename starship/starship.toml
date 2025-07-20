@@ -27,10 +27,10 @@ truncate_to_repo = false
 [character]
 success_symbol = '[󰘧](bold bright-white)'
 error_symbol = '[󰘧](bold bright-red)'
-vimcmd_symbol = '[󰘧](bold bright-white)'
-vimcmd_visual_symbol = '[󰘧](bold bright-yellow)'
-vimcmd_replace_one_symbol = '[󰘧](bold bright-purple)'
-vimcmd_replace_symbol = '[󰘧](bold bright-purple)'
+vimcmd_symbol = '[󱃮](bold bright-white)'
+vimcmd_visual_symbol = '[󰀫](bold bright-yellow)'
+vimcmd_replace_one_symbol = '[󰂡](bold bright-purple)'
+vimcmd_replace_symbol = '[󰂡](bold bright-purple)'
 
 
 # Git branch

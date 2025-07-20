@@ -29,8 +29,6 @@ fix_sequences() {
 
 fix_sequences <"${XDG_CACHE_HOME:-$HOME/.cache}/wal/sequences"
 
-# Update pywalfox
-pywalfox update
 
 # Restart dunst
 pkill dunst
