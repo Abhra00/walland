@@ -99,7 +99,7 @@
     "tooltip": true,
     "tooltip-format": "<tt>{calendar}</tt>",
     "format" : "{:%d %b | %H:%M}",
-    "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e nmtui'",
+    "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e calcurse'",
     "actions":  {
       "on-click-right": "mode",
       "on-click-forward": "tz_up",
@@ -180,7 +180,7 @@
     "format-linked": " {ifname} (No IP)",
     "format-disconnected": " Disconnected",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    "on--click-right": "hyprctl dispatch exec '[float]' '$TERMINAL -e nmtui'"
+    "on-click-right": "hyprctl dispatch exec '[float]' '$TERMINAL -e nmtui'"
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
