@@ -30,9 +30,16 @@ fix_sequences() {
 fix_sequences <"${XDG_CACHE_HOME:-$HOME/.cache}/wal/sequences"
 
 
-# Restart dunst
-pkill dunst
-setsid -f dunst
+# Restart dunst & waybar
+$HOME/.config/hypr/scripts/refresh.sh
+
+# Upadte pywalfox colors
+pywalfox update
+
+# Export colors.env for waybar
+jq -r '.colors | to_entries[] | "export COLOR\(.key[5:])=\(.value)"' "$HOME/.cache/wal/colors.json" > "$HOME/.config/waybar/colors.env"
+jq -r '.special | to_entries[] | "export \U\(.key | gsub("-"; "_") | ascii_upcase)=\(.value)"' "$HOME/.cache/wal/colors.json" >> "$HOME/.config/waybar/colors.env"
+
 
 # Copy qt colors
 cp $HOME/.cache/wal/qtct-colors.conf $HOME/.config/qt5ct/colors/pywalqtcolors.conf

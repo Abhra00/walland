@@ -143,7 +143,7 @@ if [[ -n "$wall_selection" ]]; then
 
 	# generate pywal colors
 	wait $!
-	wal -n -i "${wallpaper_path}" --cols16 -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun.sh"
+	wal -n -e -i "${wallpaper_path}" --cols16 -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun.sh"
 
 
 	#-------Imagemagick magick 👀--------------#

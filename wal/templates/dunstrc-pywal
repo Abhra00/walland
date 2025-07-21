@@ -42,17 +42,20 @@ icon_path = usr/share/icons/Papirus-Dark/48x48/actions/:/usr/share/icons/Papirus
 [urgency_low]
     background 	= "{background}"
     foreground 	= "{foreground}"
+    highlight   = "{color13}"
     frame_color = "{color8}"
     timeout = 3
 
 [urgency_normal]
     background 	= "{background}"
     foreground 	= "{foreground}"
+    highlight   = "{color13}"
     frame_color = "{color8}"
     timeout = 3
 
 [urgency_critical]
     background 	= "{color0}"
     foreground 	= "{color9}"
+    highlight   = "{color13}"
     frame_color = "{color9}"
     timeout = 1000

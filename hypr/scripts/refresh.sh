@@ -14,7 +14,7 @@ done
 
 # relaunch waybar
 sleep 1
-waybar &
+$HOME/.config/hypr/scripts/waybar-launch.sh
 
 # relaunch swaync
 sleep 0.5

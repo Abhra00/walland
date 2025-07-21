@@ -9,6 +9,7 @@
 
 // -*- mode: jsonc -*-
 {
+  "include": [ "$HOME/.cache/wal/colors.json" ],
   "layer": "top", // Waybar at top layer
   "position": "top", // Waybar position (top|bottom|left|right)
   "height": 40, // Waybar height (to be removed for auto height)
@@ -17,7 +18,8 @@
   "modules-left": [
     "clock",
     "mpd",
-    "custom/pacman"
+    "custom/pacman",
+    "custom/colorpicker",
   ],
   "modules-center": [
     "hyprland/workspaces"
@@ -66,16 +68,16 @@
     "interval": 5,
     "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e rmpc'",
     "consume-icons": {
-      "off": "<span color=\"#15161e\"> </span> ",
-      "on": "<span color=\"#c0caf5\"> </span> "
+      "off": "<span color='$COLOR8'> </span> ",
+      "on": "<span color='$COLOR15'> </span> "
     },
     "random-icons": {
-      "off": "<span color=\"#15161e\"> </span> ",
-      "on": "<span color=\"#c0caf5\"> </span> "
+      "off": "<span color='$COLOR8'> </span> ",
+      "on": "<span color='$COLOR15'> </span> "
     },
     "repeat-icons": {
-      "off": "<span color=\"#15161e\"> </span> ",
-      "on": "<span color=\"#c0caf5\"> </span> "
+      "off": "<span color='$COLOR8'> </span> ",
+      "on": "<span color='$COLOR15'> </span> "
     },
     "single-icons": {
       "on": " 1",
@@ -97,7 +99,7 @@
     "tooltip": true,
     "tooltip-format": "<tt>{calendar}</tt>",
     "format" : "{:%d %b | %H:%M}",
-    "on-click": "ghostty -e calcurse &",
+    "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e nmtui'",
     "actions":  {
       "on-click-right": "mode",
       "on-click-forward": "tz_up",
@@ -111,11 +113,11 @@
       "weeks-pos"     : "left",
       "on-scroll"     : 1,
       "format": {
-        "months":     "<span color='#9ece6a'><b>{}</b></span>",
-        "days":       "<span color='#e0af68'><b>{}</b></span>",
-        "weeks":      "<span color='#7aa2f7'><b>W{}</b></span>",
-        "weekdays":   "<span color='#bb9af7'><b>{}</b></span>",
-        "today":      "<span color='#7dcfff'><b>{}</b></span>"
+        "months":     "<span color='$COLOR2'><b>{}</b></span>",
+        "days":       "<span color='$COLOR3'><b>{}</b></span>",
+        "weeks":      "<span color='$COLOR4'><b>W{}</b></span>",
+        "weekdays":   "<span color='$COLOR5'><b>{}</b></span>",
+        "today":      "<span color='$COLOR6'><b>{}</b></span>"
       }
     }
   },
@@ -178,7 +180,7 @@
     "format-linked": " {ifname} (No IP)",
     "format-disconnected": " Disconnected",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    "on-right-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e nmtui'"
+    "on--click-right": "hyprctl dispatch exec '[float]' '$TERMINAL -e nmtui'"
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
@@ -194,6 +196,14 @@
       "default": [" ", " ", " "]
     },
     "on-click": "pavucontrol"
+  },
+  "custom/colorpicker": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": "once",
+    "exec": "~/.config/waybar/scripts/colorpicker.sh -j",
+    "on-click": "~/.config/waybar/scripts/colorpicker.sh",
+    "signal": 1
   },
   "wlr/taskbar": {
     "format": "{icon}",
