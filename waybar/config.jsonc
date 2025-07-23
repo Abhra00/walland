@@ -19,7 +19,7 @@
     "clock",
     "mpd",
     "custom/pacman",
-    "custom/colorpicker",
+    "custom/colorpicker"
   ],
   "modules-center": [
     "hyprland/workspaces"
@@ -131,7 +131,7 @@
   "temperature": {
     "critical-threshold": 80,
     "format": "{temperatureC}°C {icon}",
-    "format-icons": ["", "", ""]
+    "format-icons": ["", "", ""]
   },
   "backlight": {
     // "device": "acpi_video1",
@@ -180,7 +180,7 @@
     "format-linked": " {ifname} (No IP)",
     "format-disconnected": " Disconnected",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    "on-click-right": "hyprctl dispatch exec '[float]' '$TERMINAL -e nmtui'"
+    "on-click-right": "$TERMINAL --title TermNmtui sh -c 'sleep 0.1; nmtui'"
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
@@ -208,7 +208,7 @@
   "wlr/taskbar": {
     "format": "{icon}",
     "icon-size": 20,
-    "icon-theme": "Numix-Circle",
+    "icon-theme": "Papirus",
     "markup": true,
     "tooltip": false,
     "tooltip-format": "{title} ({state}",
