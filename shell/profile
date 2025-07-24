@@ -20,7 +20,7 @@ unsetopt PROMPT_SP 2>/dev/null
 
 # Variables
 export EDITOR="nvim"
-export TERMINAL="ghostty"
+export TERMINAL="foot"
 export BROWSER="firefox"
 
 # Home cleanup
@@ -48,5 +48,5 @@ export PATH="$PATH:$HOME/.spicetify"
 #
 # Starting Wayland
 if [ -z "$DISPLAY" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-  exec dbus-run-session Hyprland
+    exec dbus-run-session Hyprland
 fi
