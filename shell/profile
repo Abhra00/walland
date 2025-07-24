@@ -1,0 +1,52 @@
+#!/bin/sh
+
+#  ┏┓┳┓┏┓┏┓┳┓ ┏┓
+#  ┃┃┣┫┃┃┣ ┃┃ ┣
+#  ┣┛┛┗┗┛┻ ┻┗┛┗┛
+#
+#  ┓ ┏┓┳┳┳┓┏┓┓┏  ┓┏┓┏┏┓┳┓┓ ┏┓┳┓┳┓  ┓ ┳┓┏┓┏┓  ┏┓  ┏┓┓┏┏┓┳┓
+#  ┃ ┣┫┃┃┃┃┃ ┣┫  ┣┫┗┫┃┃┣┫┃ ┣┫┃┃┃┃  ┃ ┃┃┫ ┣   ┣┫  ┃ ┣┫┣┫┃┃
+#  ┗┛┛┗┗┛┛┗┗┛┛┗  ┛┗┗┛┣┛┛┗┗┛┛┗┛┗┻┛  ┗┛┻┛┗┛┗┛  ┛┗  ┗┛┛┗┛┗┻┛
+#
+
+# shellcheck disable=SC2155
+
+# Profile file, runs on login. Environmental variables are set here.
+
+# Add all directories in `~/.local/bin` to $PATH
+export PATH="$PATH:$(find ~/.local/bin -type d | paste -sd ':' -)"
+
+unsetopt PROMPT_SP 2>/dev/null
+
+# Variables
+export EDITOR="nvim"
+export TERMINAL="ghostty"
+export BROWSER="firefox"
+
+# Home cleanup
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export KODI_DATA="$XDG_DATA_HOME/kodi"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+
+# Fzf OPTS
+export FZF_DEFAULT_OPTS="--style=full --height=90% --pointer '>' \
+                --color 'pointer:green:bold,bg+:-1:,fg+:green:bold,info:blue:bold,marker:yellow:bold,hl:gray:bold,hl+:yellow:bold' \
+                --input-label ' Search ' --color 'input-border:blue,input-label:blue:bold' \
+                --list-label ' Results ' --color 'list-border:green,list-label:green:bold' \
+                --preview-label ' Preview ' --color 'preview-border:magenta,preview-label:magenta:bold'"
+
+# Spicetify
+export PATH="$PATH:$HOME/.spicetify"
+
+#  ┓ ┏┓┳┳┳┓┏┓┓┏  ┓┏┓┏┏┓┳┓┓ ┏┓┳┓┳┓
+#  ┃ ┣┫┃┃┃┃┃ ┣┫  ┣┫┗┫┃┃┣┫┃ ┣┫┃┃┃┃
+#  ┗┛┛┗┗┛┛┗┗┛┛┗  ┛┗┗┛┣┛┛┗┗┛┛┗┛┗┻┛
+#
+# Starting Wayland
+if [ -z "$DISPLAY" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec dbus-run-session Hyprland
+fi
