@@ -180,7 +180,7 @@
     "format-linked": " {ifname} (No IP)",
     "format-disconnected": " Disconnected",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    "on-click-right": "$TERMINAL --title TermNmtui sh -c 'sleep 0.1; nmtui'"
+    "on-click-right": "hyprctl dispatch exec '[float]' '$TERMINAL -e nmtui'"
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
