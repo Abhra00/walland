@@ -1,23 +1,17 @@
-#!/bin/sh
-#  ┏┓┓ ┳┏┓┏┓┏┓┏┓
-#  ┣┫┃ ┃┣┫┗┓┣ ┗┓
-#  ┛┗┗┛┻┛┗┗┛┗┛┗┛
-#
-
 #  ┏┓┏┓  ┏┓┓ ┳┏┓┏┓┏┓┏┓
 #  ┏┛┃┫━━┣┫┃ ┃┣┫┗┓┣ ┗┓
 #  ┗━┗┛  ┛┗┗┛┻┛┗┗┛┗┛┗┛
-#
+#                     
 
 # ── File Management & Navigation with eza ────────────────
 alias ls='eza --icons --color=always --group-directories-first'
-alias l='eza -lh --icons --color=always'     # long + human-readable
-alias la='eza -a --icons --color=always'     # show hidden
-alias ll='eza -lga --icons --color=always'   # long + git + all + icons
-alias lsd='eza -d */ --icons --color=always' # directories only
-alias lt='eza --tree --icons --color=always' # tree view
-alias l1='eza -1 --icons --color=always'     # one entry per line
-alias cat='bat --theme=base16'               # bat for cat
+alias l='eza -lh --icons --color=always'                   # long + human-readable
+alias la='eza -a --icons --color=always'                   # show hidden
+alias ll='eza -lga --icons --color=always'                 # long + git + all + icons
+alias lsd='eza -d */ --icons --color=always'               # directories only
+alias lt='eza --tree --icons --color=always'               # tree view
+alias l1='eza -1 --icons --color=always'                   # one entry per line
+alias cat='bat --theme=base16'				   # bat for cat
 
 # ── File Utilities ────────────────────────────────────────
 alias cp='cp -iv'
@@ -58,5 +52,6 @@ alias gco='git checkout'
 
 # ── Misc Utilities ────────────────────────────────────────
 alias h='history'
-alias reload='exec zsh'
+alias reload='exec fish'
 alias q='exit'
+
