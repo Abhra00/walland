@@ -9,16 +9,16 @@
 /*--------Color definitions------------*/
 
 * {{
-       bg: 			{background};
-       bg-alpha: 		{background}b3;
-       bg-alt:   		{color8};
-       bg-alt-alpha:    	{color8}b3;
-       fg:       		{foreground};
-       border:     		{color8};
-       selected-color:         	{color13};
-       selected-color-alpha:   	{color13}b3;
+       bg: 			            {background};
+       bg-alpha: 		        {background}b3;
+       bg-alt:   		        {color8};
+       bg-alt-alpha:    	    {color8}b3;
+       fg:       		        {foreground};
+       border:     		        {color13};
+       selected-color:         	{color10};
+       selected-color-alpha:   	{color10}b3;
        selected-text-color:    	{background};
-       active-color:           	{color10};
+       active-color:           	{color13};
        urgent-color:           	{color9};
 }}
 

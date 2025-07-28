@@ -7,194 +7,159 @@
 
 
 
-/*****----- Configuration -----*****/
+
+// Config //
 configuration {
-   modi:                       "drun,run,window";
-    show-icons:                 true;
-    display-drun:               "󰘳";
-    display-run:                "";
-    display-filebrowser:        "FILES";
-    display-window:             "";
-    drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
-    drun-display-actions:       true;
-    window-format:              "{w} · {c} · {t}";
-    hide-scrollbar: true;
+    modi:                        "drun,filebrowser,window,run";
+    show-icons:                  true;
+    display-drun:                "";
+    display-run:                 "";
+    display-filebrowser:         "";
+    display-window:              "";
+    drun-display-format:         "{name}";
+    window-format:               "{w}{t}";
 }
 
 
-/*****----- Global Properties -----*****/
-@import                          "~/.config/rofi/shared/colors.rasi"
-@import                          "~/.config/rofi/shared/fonts.rasi"
+// Global Properties //
+@import  "~/.config/rofi/shared/colors.rasi"
+@import  "~/.config/rofi/shared/fonts.rasi"
 
-/*****----- Main Window -----*****/
+// Main //
 window {
-    /* properties for window widget */
+    height:                      530px;
+    width:                       1000px;
     transparency:                "real";
-    location:                    center;
-    anchor:                      center;
     fullscreen:                  false;
-    width:                       1100px;
-    height:                      500px;
-    x-offset:                    0px;
-    y-offset:                    0px;
-
-    /* properties for all widgets */
     enabled:                     true;
-    padding:                     0px;
-    border-radius:               20px;
     cursor:                      "default";
+    spacing:                     0px;
+    padding:                     1px;
+    border-radius:               0px;
+    border:                      2px solid;
     border-color:                @border-color;
-    border:                      0px;
-    background-color:            @background;
+    background-color:            @background-alpha;
 }
-
-/*****----- Main Box -----*****/
 mainbox {
     enabled:                     true;
+    spacing:                     0em;
+    padding:                     0em;
+    orientation:                 horizontal;
+    children:                    [ "dummywall" , "listbox" ];
+    background-color:            transparent;
+}
+dummywall {
     spacing:                     0px;
-    padding:                     20px 20px 20px 0px;
-    background-color:            @background;
-    orientation:                 horizontal;
-    children:                    ["mode-switcher", "imagebox", "listbox" ];
-}
-
-imagebox {
     padding:                     0px;
-    background-color:            transparent;
-    background-image:            url("~/.config/rofi/images/currentWal.thumb", width);
-    orientation:                 horizontal;
-    border-radius:               20px;
-    children:                    [ "dummy"];
-}
-
-listbox {
-    padding:                     0px 0px 0px 20px;
-    background-color:            transparent;
-    orientation:                 vertical;
-    children:                    [  "inputbar", "message", "listview" ];
-}
-
-dummy {
-    background-color:            transparent;
-}
-
-/*****----- Inputbar -----*****/
-inputbar {
-    enabled:                     true;
-    spacing:                     10px;
-    padding:                     10px;
-    margin:                      0px 0px 10px 0px;
-    border-color:                @selected;
-    border-radius:               20px;
-    border:                      2px;
-    background-color:            @background;
-    text-color:                  @foreground;
-    children:                    [ "textbox-prompt-colon", "entry" ];
-}
-textbox-prompt-colon {
-    enabled:                     true;
+    width:                       550px;
     expand:                      false;
-    str:                         " ";
+    orientation:                 horizontal;
+    children:                    [ "mode-switcher" , "inputbar" ];
     background-color:            transparent;
-    text-color:                  inherit;
-    padding:                     2px 2px 2px 10px;
-}
-entry {
-    enabled:                     true;
-    background-color:            transparent;
-    padding:                     2px;
-    text-color:                  inherit;
-    cursor:                      text;
-    placeholder:                 "Search";
-    placeholder-color:           inherit;
+    background-image:            url("~/.config/rofi/images/currentWal.thumb", height);
 }
 
-/*****----- Mode Switcher -----*****/
+
+// Modes //
 mode-switcher{
-    enabled:                     true;
-    spacing:                     20px;
-    margin:                      130px 20px;
     orientation:                 vertical;
+    enabled:                     true;
+    width:                       60px;
+    padding:                     145px 8px 145px 8px;
+    spacing:                     20px;
     background-color:            transparent;
-    text-color:                  @foreground;
+    background-image:            url("~/.config/rofi/images/currentWalBlur.thumb", height);
 }
 button {
-    padding:                     0px 23px 0px 20px;
-    border-radius:               20px;
-    background-color:            @background;
-    text-color:                  inherit;
     cursor:                      pointer;
+    border-radius:               32px;
+    background-color:            @background-alpha;
+    text-color:                  @foreground;
 }
 button selected {
     background-color:            @selected;
-    text-color:                  @background;
+    text-color:                  @selected-text;
 }
 
-/*****----- Listview -----*****/
+
+// Inputs //
+inputbar {
+    enabled:                     true;
+    children:                    [ "entry" ];
+    background-color:            transparent;
+}
+entry {
+    enabled:                     false;
+}
+
+
+// Lists //
+listbox {
+    children:                    [ "dummy" , "listview" , "dummy" ];
+    background-color:            transparent;
+}
 listview {
     enabled:                     true;
+    spacing:                     0px;
+    padding:                     0px 20px 0px 20px;
     columns:                     1;
-    lines:                       7;
+    lines:                       8;
     cycle:                       true;
     dynamic:                     true;
     scrollbar:                   false;
     layout:                      vertical;
     reverse:                     false;
+    expand:                      false;
     fixed-height:                true;
     fixed-columns:               true;
-
-    border-color:                transparent;
+    cursor:                      "default";
     background-color:            transparent;
     text-color:                  @foreground;
-    cursor:                      "default";
+}
+dummy {
+    background-color:            transparent;
 }
 
-/*****----- Elements -----*****/
+
+// Elements //
 element {
     enabled:                     true;
-    spacing:                     15px;
-    padding:                     10px;
-    border-radius:               20px;
+    spacing:                     12px;
+    border-radius:               5px;
+    padding:                     7px 7px 7px 24px;
+    cursor:                      pointer;
     background-color:            transparent;
     text-color:                  @foreground;
-    cursor:                      pointer;
 }
-element selected {
+element selected.normal {
     background-color:            @selected;
-    text-color:                  @background;
+    text-color:                  @selected-text;
 }
 element-icon {
+    size:                        45px;
+    cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;
-    size:                        32px;
-    cursor:                      inherit;
 }
 element-text {
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    cursor:                      inherit;
     background-color:            transparent;
     text-color:                  inherit;
-    cursor:                      inherit;
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
 }
 
-/*****----- Message -----*****/
-message {
-    background-color:            transparent;
-    border-color:                @selected;
-    border-radius:               10px;
-    border:                      0px 0px 2px 0px;
-}
-textbox {
-    padding:                     15px;
-    border-radius:               5px;
-    background-color:            @background;
-
-    vertical-align:              0.5;
-    horizontal-align:            0.0;
-}
+// Error message //
 error-message {
-    padding:                     15px;
-    border-radius:               15px;
-    background-color:            @background;
     text-color:                  @foreground;
+    background-color:            @background;
+    text-transform:              capitalize;
+    children:                    [ "textbox" ];
+}
+
+textbox {
+    text-color:                  inherit;
+    background-color:            inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
 }

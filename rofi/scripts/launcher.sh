@@ -5,7 +5,7 @@
 #
 
 # Style-theme
-style_theme='~/.config/rofi/launcher3.rasi'
+style_theme="$HOME/.config/rofi/launcher1.rasi"
 
 # Run
-pkill rofi || true && rofi -show drun -theme ${style_theme}
+pkill rofi || true && rofi -show drun -theme "${style_theme}"

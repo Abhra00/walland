@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #  ┓ ┏┏┓┓ ┓ ┏┓┏┓┓ ┏┓┏┓┏┳┓
-#  ┃┃┃┣┫┃ ┃ ┗┓┣ ┃ ┣ ┃  ┃ 
-#  ┗┻┛┛┗┗┛┗┛┗┛┗┛┗┛┗┛┗┛ ┻ 
-#                        
+#  ┃┃┃┣┫┃ ┃ ┗┓┣ ┃ ┣ ┃  ┃
+#  ┗┻┛┛┗┗┛┗┛┗┛┗┛┗┛┗┛┗┛ ┻
+#
 
 # Thank you gh0stzk for the script 🤲 means a lot
 # Copyright (C) 2021-2025 gh0stzk <z0mbi3.zk@protonmail.com>
@@ -27,8 +27,6 @@
 #   → Media: swww, imagemagick
 #   → GNU: findutils, coreutils, bc
 
-
-
 # Set dir varialable
 wall_dir="$HOME/walls"
 cacheDir="$HOME/.cache/wallcache"
@@ -36,7 +34,6 @@ scriptsDir="$HOME/.config/hypr/scripts"
 
 # Create cache dir if not exists
 [ -d "$cacheDir" ] || mkdir -p "$cacheDir"
-
 
 # Get focused monitor
 focused_monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
@@ -53,7 +50,7 @@ rofi_command="rofi -i -show -dmenu -theme $HOME/.config/rofi/wallSelect.rasi -th
 # Detect number of cores and set a sensible number of jobs
 get_optimal_jobs() {
     local cores=$(nproc)
-    (( cores <= 2 )) && echo 2 || echo $(( (cores > 4) ? 4 : cores-1 ))
+    ((cores <= 2)) && echo 2 || echo $(((cores > 4) ? 4 : cores - 1))
 }
 
 PARALLEL_JOBS=$(get_optimal_jobs)
@@ -71,7 +68,7 @@ process_image() {
         flock -x 200
         if [ ! -f "$cache_file" ] || [ ! -f "$md5_file" ] || [ "$current_md5" != "$(cat "$md5_file" 2>/dev/null)" ]; then
             magick "$imagen" -resize 500x500^ -gravity center -extent 500x500 "$cache_file"
-            echo "$current_md5" > "$md5_file"
+            echo "$current_md5" >"$md5_file"
         fi
         # Clean the lock file after processing
         rm -f "$lock_file"
@@ -86,7 +83,7 @@ export wall_dir cacheDir
 rm -f "${cacheDir}"/.lock_* 2>/dev/null || true
 
 # Process files in parallel
-find "$wall_dir" -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" \) -print0 | \
+find "$wall_dir" -type f \( -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.gif" \) -print0 |
     xargs -0 -P "$PARALLEL_JOBS" -I {} bash -c 'process_image "{}"'
 
 # Clean orphaned cache files and their locks
@@ -105,8 +102,8 @@ done
 rm -f "${cacheDir}"/.lock_* 2>/dev/null || true
 
 # Check if rofi is already running
-if pidof rofi > /dev/null; then
-  pkill rofi
+if pidof rofi >/dev/null; then
+    pkill rofi
 fi
 
 # Launch rofi
@@ -115,11 +112,14 @@ wall_selection=$(find "${wall_dir}" -type f \( -iname "*.jpg" -o -iname "*.jpeg"
     LC_ALL=C sort -V |
     while IFS= read -r A; do
         if [[ "$A" =~ \.gif$ ]]; then
-            printf "%s\n" "$A"  # Handle gifs by showing only file name
+            printf "%s\n" "$A" # Handle gifs by showing only file name
         else
-            printf '%s\x00icon\x1f%s/%s\n' "$A" "${cacheDir}" "$A"  # Non-gif files with icon convention
+            printf '%s\x00icon\x1f%s/%s\n' "$A" "${cacheDir}" "$A" # Non-gif files with icon convention
         fi
     done | $rofi_command)
+
+# Exit immediately if there is no selection
+[[ -z "${wall_selection}" ]] && exit 0
 
 # SWWW Config
 FPS=60
@@ -128,7 +128,6 @@ DURATION=2
 BEZIER=".43,1.19,1,.4"
 SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
 
-
 # initiate swww if not running
 swww query || swww-daemon --format xrgb
 
@@ -136,39 +135,9 @@ swww query || swww-daemon --format xrgb
 wallpaper_path="${wall_dir}/${wall_selection}"
 
 # set wallpaper & export wall-thumbnails to rofi folder
-if [[ -n "$wall_selection" ]]; then
 
-	# set wallpaper
-	swww img -o "$focused_monitor" "${wallpaper_path}" $SWWW_PARAMS
+# set wallpaper
+swww img -o "${focused_monitor}" "${wallpaper_path}" ${SWWW_PARAMS}
 
-	# generate pywal colors
-	wait $!
-	wal -n -e -i "${wallpaper_path}" --cols16 -o "${XDG_CONFIG_HOME:-$HOME/.config}/wal/postrun.sh"
-
-
-	#-------Imagemagick magick 👀--------------#
-	wait $!
-
-	# convert and resize the current wallpaper & make it image for rofi with blur
-	magick "$wallpaper_path" -strip -resize 1000 -gravity center -extent 1000 -blur "30x30" -quality 90 $HOME/.config/rofi/images/currentWalBlur.thumb
-
-	# convert and resize the current wallpaper & make it image for rofi without blur
-	magick "$wallpaper_path" -strip -resize 1000 -gravity center -extent 1000 -quality 90 $HOME/.config/rofi/images/currentWal.thumb
-
-	# convert and resize the current wallpaper & make it image for rofi with square format
-	magick "$wallpaper_path" -strip -thumbnail 500x500^ -gravity center -extent 500x500 $HOME/.config/rofi/images/currentWal.sqre
-
-	# convert and resize the square formatted & make it image for rofi with drawing polygon
-	magick $HOME/.config/rofi/images/currentWal.sqre \( -size 500x500 xc:white -fill "rgba(0,0,0,0.7)" -draw "polygon 400,500 500,500 500,0 450,0" -fill black -draw "polygon 500,500 500,0 450,500" \) -alpha Off -compose CopyOpacity -composite $HOME/.config/rofi/images/currentWalQuad.png && mv $HOME/.config/rofi/images/currentWalQuad.png $HOME/.config/rofi/images/currentWalQuad.quad
-
-
-	# copy the wallpaper in current-wallpaper file
-	wait $!
-	ln -sf "$wallpaper_path" "$HOME/.local/share/bg"
-
-	# send notification after completion
-	wait $!
-	notify-send -e -h string:x-canonical-private-synchronous:matugen_notif "WallSelect 💫" "Pywal & ImageMagick has completed its job" -i $HOME/.local/share/bg
-
-fi
-
+# run magic script
+"${scriptsDir}"/magic.sh "WallMagic 💫"
