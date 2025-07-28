@@ -13,7 +13,7 @@ set fish_greeting ""
 
 # Default programs
 set -gx EDITOR nvim
-set -gx TERMINAL kitty
+set -gx TERMINAL foot
 set -gx LOCATION Memari
 set -gx BROWSER firefox
 
