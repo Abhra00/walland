@@ -24,7 +24,7 @@
 #
 # Dependencies:
 #   → Core: hyprland, rofi, jq, xxhsum (xxhash)
-#   → Media: swww, imagemagick
+#   → Media: hyprpaper, imagemagick
 #   → GNU: findutils, coreutils, bc
 
 # Set dir varialable
@@ -121,23 +121,27 @@ wall_selection=$(find "${wall_dir}" -type f \( -iname "*.jpg" -o -iname "*.jpeg"
 # Exit immediately if there is no selection
 [[ -z "${wall_selection}" ]] && exit 0
 
-# SWWW Config
-FPS=60
-TYPE="any"
-DURATION=2
-BEZIER=".43,1.19,1,.4"
-SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
-
-# initiate swww if not running
-swww query || swww-daemon --format xrgb
-
 # full wallpaper path
 wallpaper_path="${wall_dir}/${wall_selection}"
 
-# set wallpaper & export wall-thumbnails to rofi folder
+# Ensure hyprpaper is running
+if ! pgrep -x "hyprpaper" >/dev/null; then
+    echo "🚀 Starting hyprpaper..."
+    hyprpaper &
+    sleep 0.5 # Wait a bit to ensure the socket is ready
+else
+    echo "✅ hyprpaper is already running"
+fi
 
-# set wallpaper
-swww img -o "${focused_monitor}" "${wallpaper_path}" ${SWWW_PARAMS}
+# Preload the wallpaper
+hyprctl hyprpaper preload "${wallpaper_path}"
+sleep 0.1 # Optional small delay
 
-# run magic script
-"${scriptsDir}"/magic.sh "WallMagic 💫"
+# Set the wallpaper
+hyprctl hyprpaper wallpaper "$focused_monitor,${wallpaper_path}"
+
+# Optional: delay before theme script
+sleep 0.2
+
+# Run theme script
+"$scriptsDir/magic.sh" "WallMagick 💫"

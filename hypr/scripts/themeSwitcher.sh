@@ -48,26 +48,5 @@ cp "$wall_collection_dir"/"$selected_theme"/* "$wall_selection_dir"
 # Set the theme using pywal
 wal --theme -f "$selected_theme_fpath" -o "$postrun_script"
 
-# Choose a random wallpaper
-wall=$(find "${wall_selection_dir}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | shuf -n 1)
-
-echo $wall
-
-# Find current focues monitor
-focused_monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
-
-# SWWW Config
-FPS=60
-TYPE="any"
-DURATION=2
-BEZIER=".43,1.19,1,.4"
-SWWW_PARAMS="--transition-fps $FPS --transition-type $TYPE --transition-duration $DURATION --transition-bezier $BEZIER"
-
-# Initiate swww if not running
-swww query || swww-daemon --format xrgb
-
-# Set wallpaper
-swww img -o "${focused_monitor}" "${wall}" ${SWWW_PARAMS}
-
-# Run magic script
-"${scriptsDir}"/magic.sh "ThemeMagick 💫"
+# Set random wallpaper
+"${scriptsDir}"/randWall.sh
