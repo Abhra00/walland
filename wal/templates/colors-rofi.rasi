@@ -14,7 +14,7 @@
        bg-alt:   		        {color8};
        bg-alt-alpha:    	    {color8}b3;
        fg:       		        {foreground};
-       border:     		        {color13};
+       border:     		        {color10};
        selected-color:         	{color10};
        selected-color-alpha:   	{color10}b3;
        selected-text-color:    	{background};
