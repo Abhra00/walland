@@ -101,6 +101,7 @@ button {
 #custom-power,
 #custom-pacman,
 #custom-colorpicker,
+#custom-swaync,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -132,7 +133,9 @@ button {
   color: @magenta;
 }
 
-
+#custom-swaync {
+    color: @magenta;
+}
 
 #pulseaudio.muted {
   color: @red;

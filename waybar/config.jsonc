@@ -9,129 +9,130 @@
 
 // -*- mode: jsonc -*-
 {
-  "include": [ "$HOME/.cache/wal/colors.json" ],
-  "layer": "top", // Waybar at top layer
-  "position": "top", // Waybar position (top|bottom|left|right)
-  "height": 40, // Waybar height (to be removed for auto height)
-  "spacing": 0, // Gaps between modules (4px)
-  "reload_style_on_change": true,
-  "modules-left": [
-    "clock",
-    "mpd",
-    "custom/pacman",
-    "custom/colorpicker"
-  ],
-  "modules-center": [
-    "hyprland/workspaces"
-  ],
-  "modules-right": [
-    "memory",
-    "cpu",
-    "backlight",
-    "pulseaudio",
-    "network",
-    "battery",
-    "tray"
-  ],
+    "include": [ "$HOME/.cache/wal/colors.json" ],
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 40, // Waybar height (to be removed for auto height)
+    "spacing": 0, // Gaps between modules (4px)
+    "reload_style_on_change": true,
+    "modules-left": [
+        "clock",
+        "mpd",
+        "custom/pacman",
+        "custom/colorpicker"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "memory",
+        "cpu",
+        "backlight",
+        "pulseaudio",
+        "network",
+        "battery",
+        "custom/swaync",
+        "tray"
+    ],
   // Modules configuration
 
   "hyprland/workspaces": {
-    "format": "{id}.{icon}",
-    "format-icons": {
-      "1": "DEV",
-      "2": "DOC",
-      "3": "WEB",
-      "4": "IMG",
-      "5": "VFX",
-      "6": "SYS",
-      "7": "FUN",
-      "8": "CHAT",
-      "9": "MICS"
-    },
-    "all-outputs": true,
-    "persistent-workspaces": {}
+      "format": "{id}.{icon}",
+      "format-icons": {
+          "1": "DEV",
+          "2": "DOC",
+          "3": "WEB",
+          "4": "IMG",
+          "5": "VFX",
+          "6": "SYS",
+          "7": "FUN",
+          "8": "CHAT",
+          "9": "MICS"
+      },
+      "all-outputs": true,
+      "persistent-workspaces": {}
   },
   "custom/pacman": {
-    "interval": 3600,
-    "return-type": "json",
-    "exec": "~/.config/waybar/scripts/pacman-updates.sh",
-    "exec-if": "exit 0",
-    "on-click": "$TERMINAL -e paru; pkill -SIGRTMIN+8 waybar",
-    "signal": 8
+      "interval": 3600,
+      "return-type": "json",
+      "exec": "~/.config/waybar/scripts/pacman-updates.sh",
+      "exec-if": "exit 0",
+      "on-click": "$TERMINAL -e paru; pkill -SIGRTMIN+8 waybar",
+      "signal": 8
   },
   "mpd": {
-    "format": " {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) :: {volume}%",
-    "format-disconnected": "Disconnected",
-    "format-stopped": " Stopped",
-    "unknown-tag": "N/A",
-    "title-len": 30,
-    "interval": 5,
-    "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e rmpc'",
-    "consume-icons": {
-      "off": "<span color='$COLOR8'> </span> ",
-      "on": "<span color='$COLOR15'> </span> "
-    },
-    "random-icons": {
-      "off": "<span color='$COLOR8'> </span> ",
-      "on": "<span color='$COLOR15'> </span> "
-    },
-    "repeat-icons": {
-      "off": "<span color='$COLOR8'> </span> ",
-      "on": "<span color='$COLOR15'> </span> "
-    },
-    "single-icons": {
-      "on": " 1",
-      "off": " 1"
-    },
-    "state-icons": {
-      "paused": " ",
-      "playing": " "
-    },
-    "tooltip": false,
-    "tooltip-format": "MPD (connected)",
-    "tooltip-format-disconnected": "MPD (disconnected)"
+      "format": " {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) :: {volume}%",
+      "format-disconnected": "Disconnected",
+      "format-stopped": " Stopped",
+      "unknown-tag": "N/A",
+      "title-len": 30,
+      "interval": 5,
+      "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e rmpc'",
+      "consume-icons": {
+          "off": "<span color='$COLOR8'> </span> ",
+          "on": "<span color='$COLOR15'> </span> "
+      },
+      "random-icons": {
+          "off": "<span color='$COLOR8'> </span> ",
+          "on": "<span color='$COLOR15'> </span> "
+      },
+      "repeat-icons": {
+          "off": "<span color='$COLOR8'> </span> ",
+          "on": "<span color='$COLOR15'> </span> "
+      },
+      "single-icons": {
+          "on": " 1",
+          "off": " 1"
+      },
+      "state-icons": {
+          "paused": " ",
+          "playing": " "
+      },
+      "tooltip": false,
+      "tooltip-format": "MPD (connected)",
+      "tooltip-format-disconnected": "MPD (disconnected)"
   },
   "tray": {
-    "tooltip": false,
-    "spacing": 10
+      "tooltip": false,
+      "spacing": 10
   },
   "clock": {
-    "tooltip": true,
-    "tooltip-format": "<tt>{calendar}</tt>",
-    "format" : "{:%d %b | %H:%M}",
-    "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e calcurse'",
-    "actions":  {
-      "on-click-right": "mode",
-      "on-click-forward": "tz_up",
-      "on-click-backward": "tz_down",
-      "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down"
-    },
-    "calendar": {
-      "mode"          : "month",
-      "mode-mon-col"  : 3,
-      "weeks-pos"     : "left",
-      "on-scroll"     : 1,
-      "format": {
-        "months":     "<span color='$COLOR2'><b>{}</b></span>",
-        "days":       "<span color='$COLOR3'><b>{}</b></span>",
-        "weeks":      "<span color='$COLOR4'><b>W{}</b></span>",
-        "weekdays":   "<span color='$COLOR5'><b>{}</b></span>",
-        "today":      "<span color='$COLOR6'><b>{}</b></span>"
+      "tooltip": true,
+      "tooltip-format": "<tt>{calendar}</tt>",
+      "format" : "{:%d %b | %H:%M}",
+      "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e calcurse'",
+      "actions":  {
+          "on-click-right": "mode",
+          "on-click-forward": "tz_up",
+          "on-click-backward": "tz_down",
+          "on-scroll-up": "shift_up",
+          "on-scroll-down": "shift_down"
+      },
+      "calendar": {
+          "mode"          : "month",
+          "mode-mon-col"  : 3,
+          "weeks-pos"     : "left",
+          "on-scroll"     : 1,
+          "format": {
+              "months":     "<span color='$COLOR2'><b>{}</b></span>",
+              "days":       "<span color='$COLOR3'><b>{}</b></span>",
+              "weeks":      "<span color='$COLOR4'><b>W{}</b></span>",
+              "weekdays":   "<span color='$COLOR5'><b>{}</b></span>",
+              "today":      "<span color='$COLOR6'><b>{}</b></span>"
+          }
       }
-    }
   },
   "cpu": {
-    "format": " {usage}%",
-    "tooltip": true
+      "format": " {usage}%",
+      "tooltip": true
   },
   "memory": {
-    "format": " {}%"
+      "format": " {}%"
   },
   "temperature": {
-    "critical-threshold": 80,
-    "format": "{temperatureC}°C {icon}",
-    "format-icons": ["", "", ""]
+      "critical-threshold": 80,
+      "format": "{temperatureC}°C {icon}",
+      "format-icons": ["", "", ""]
   },
   "backlight": {
     // "device": "acpi_video1",
@@ -139,48 +140,48 @@
     "format-icons": ["󱩏 ", "󱩑 ", "󱩓 ", "󱩕 "]
   },
   "battery": {
-    "states": {
-      "good": 95,
-      "warning": 30,
-      "critical": 15
-    },
-    "tooltip": false,
-    "format": "{icon}{capacity}%",
-    "format-full": "{icon}{capacity}%",
-    "format-charging": " {capacity}%",
-    "format-plugged": " {capacity}%",
-    "format-alt": "{icon} {time}",
-    "format-icons": [
-      " ",
-      " ",
-      " ",
-      " ",
-      " "
-    ]
+      "states": {
+          "good": 95,
+          "warning": 30,
+          "critical": 15
+      },
+      "tooltip": false,
+      "format": "{icon}{capacity}%",
+      "format-full": "{icon}{capacity}%",
+      "format-charging": " {capacity}%",
+      "format-plugged": " {capacity}%",
+      "format-alt": "{icon} {time}",
+      "format-icons": [
+          " ",
+          " ",
+          " ",
+          " ",
+          " "
+      ]
   },
   "battery#bat2": {
-    "bat": "BAT2"
+      "bat": "BAT2"
   },
   "power-profiles-daemon": {
-    "format": "{icon}",
-    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-    "tooltip": false,
-    "format-icons": {
-      "default": "",
-      "performance": "",
-      "balanced": " ",
-      "power-saver": " "
-    }
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": false,
+      "format-icons": {
+          "default": "",
+          "performance": "",
+          "balanced": " ",
+          "power-saver": " "
+      }
   },
   "network": {
-    "format-wifi": " {essid} ({signalStrength}%)",
-    "format-ethernet": "{ipaddr}/{cidr} ",
-    "tooltip": false,
-    "tooltip-format": "{ifname} via {gwaddr}",
-    "format-linked": " {ifname} (No IP)",
-    "format-disconnected": " Disconnected",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    "on-click-right": "$TERMINAL --title TermNmtui sh -c 'sleep 0.1; nmtui'"
+      "format-wifi": " {essid} ({signalStrength}%)",
+      "format-ethernet": "{ipaddr}/{cidr} ",
+      "tooltip": false,
+      "tooltip-format": "{ifname} via {gwaddr}",
+      "format-linked": " {ifname} (No IP)",
+      "format-disconnected": " Disconnected",
+      "format-alt": "{ifname}: {ipaddr}/{cidr}",
+      "on-click-right": "$TERMINAL --title TermNmtui sh -c 'sleep 0.1; nmtui'"
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
@@ -191,38 +192,60 @@
     "format-source": " {volume}%",
     "format-source-muted": " ",
     "format-icons": {
-      "headphone": " ",
-      "headset": " ",
-      "default": [" ", " ", " "]
+        "headphone": " ",
+        "headset": " ",
+        "default": [" ", " ", " "]
     },
     "on-click": "pavucontrol"
   },
   "custom/colorpicker": {
-    "format": "{}",
-    "return-type": "json",
-    "interval": "once",
-    "exec": "~/.config/waybar/scripts/colorpicker.sh -j",
-    "on-click": "~/.config/waybar/scripts/colorpicker.sh",
-    "signal": 1
+      "format": "{}",
+      "return-type": "json",
+      "interval": "once",
+      "exec": "~/.config/waybar/scripts/colorpicker.sh -j",
+      "on-click": "~/.config/waybar/scripts/colorpicker.sh",
+      "signal": 1
+  },
+
+  "custom/swaync": {
+      "tooltip": true,
+      "tooltip-format": "Left Click: Launch Notification Center\nRight Click: Do not Disturb",
+      "format": "{icon}",
+      "format-icons": {
+          "notification": "󰂚<span foreground='$COLOR9'><sup></sup></span>",
+          "none": "󰂚",
+          "dnd-notification": "󰂛<span foreground='$COLOR9'><sup></sup></span>",
+          "dnd-none": "󰂛",
+          "inhibited-notification": "󰂚<span foreground='$COLOR9'><sup></sup></span>",
+          "inhibited-none": "󰂚",
+          "dnd-inhibited-notification": "󰂛<span foreground='$COLOR9'><sup></sup></span>",
+          "dnd-inhibited-none": "󰂛"
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "sleep 0.1 && swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
   },
   "wlr/taskbar": {
-    "format": "{icon}",
-    "icon-size": 20,
-    "icon-theme": "Papirus",
-    "markup": true,
-    "tooltip": false,
-    "tooltip-format": "{title} ({state}",
-    "on-click": "activate",
-    "on-click-middle": "close",
-    "ignore-list": [
-      "Alacritty"
-    ],
-    "app_ids-mapping": {
-      "firefoxdeveloperedition": "firefox-developer-edition"
-    },
-    "rewrite": {
-      "Firefox Web Browser": "Firefox",
-      "Foot Server": "Terminal"
-    }
+      "format": "{icon}",
+      "icon-size": 20,
+      "icon-theme": "Papirus",
+      "markup": true,
+      "tooltip": false,
+      "tooltip-format": "{title} ({state}",
+          "on-click": "activate",
+          "on-click-middle": "close",
+          "ignore-list": [
+              "Alacritty"
+          ],
+          "app_ids-mapping": {
+              "firefoxdeveloperedition": "firefox-developer-edition"
+          },
+          "rewrite": {
+              "Firefox Web Browser": "Firefox",
+              "Foot Server": "Terminal"
+          }
   }
 }
