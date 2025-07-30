@@ -30,6 +30,10 @@ magick "$HOME/.config/rofi/images/currentWal.sqre" \( -size 500x500 xc:white -fi
 sleep 0.5
 ln -sf "$wallpaper_path" "$HOME/.local/share/bg"
 
+# make a square icon for using it as a notification-icon
+sleep 0.5
+magick "$wallpaper_path" -strip -thumbnail 500x500^ -gravity center -extent 500x500 "$HOME/.local/share/bg.sqre"
+
 # send notification after completion
 sleep 0.5
-notify-send -e -h string:x-canonical-private-synchronous:matugen_notif "$1" "JOB DONE BOIIIII !!!!" -i "$HOME/.local/share/bg"
+notify-send -e -h string:x-canonical-private-synchronous:matugen_notif "$1" "JOB DONE BOIIIII !!!!" -i "$HOME/.local/share/bg.sqre"
