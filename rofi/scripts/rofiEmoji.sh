@@ -5,28 +5,31 @@
 #                     
 
 
-if [ $? -eq 0 ]
-then
-    sed '1,/^### DATA ###$/d' $0 | rofi -dmenu -theme $HOME/.config/rofi/emojiSelector.rasi | cut -d ' ' -f 1 | tr -d '\n' | wl-copy
-else
-    sed '1,/^### DATA ###$/d' $0 | rofi -dmenu -theme $HOME/.config/rofi/emojiSelector.rasi | cut -d ' ' -f 1 | tr -d '\n' | wl-copy
-fi
+#!/bin/bash
+set -euo pipefail
+
+MODE="${1:-type}"
+
+emoji="$(sed '1,/^### DATA ###$/d' "$0" | rofi -i -dmenu -theme "$HOME"/.config/rofi/emojiSelector.rasi | cut -d ' ' -f 1 | tr -d '\n')"
+
+case "$MODE" in
+    type)
+        wtype "${emoji}" || wl-copy "${emoji}"
+        ;;
+    copy)
+        wl-copy "${emoji}"
+        ;;
+    both)
+        wtype "${emoji}" || true
+        wl-copy "${emoji}"
+        ;;
+    *)
+        echo "Usage: $0 [type|copy|both]"
+        exit 1
+        ;;
+esac
 exit
 ### DATA ###
-¿? question upside down reversed spanish
-← left arrow
-↑ up arrow
-→ right arrow
-↓ down arrow
-←↑→↓ all directions up down left right arrows
-AH↗️HA↘️HA↗️HA↘️HA↗️HA↘️HA↗️HA↘️ pekora arrows hahaha rabbit
-• dot circle separator
-「」 japanese quote square bracket
-¯\_(ツ)_/¯ shrug idk i dont know
-↵ enter key return
-𝕏  twitter x logo
-👉👈 etou ughhhhhhh shy
-👉👌 put it in imagination perv
 😀 grinning face face smile happy joy :D grin
 😃 grinning face with big eyes face happy joy haha :D :) smile funny
 😄 grinning face with smiling eyes face happy joy funny haha laugh like :D :) smile
@@ -1876,3 +1879,17 @@ AH↗️HA↘️HA↗️HA↘️HA↗️HA↘️HA↗️HA↘️ pekora arrows h
 🫧 bubbles soap fun carbonation sparkling
 🪪 identification card document
 🟰 heavy equals sign math
+¿? question upside down reversed spanish
+← left arrow
+↑ up arrow
+→ right arrow
+↓ down arrow
+←↑→↓ all directions up down left right arrows
+AH↗️HA↘️HA↗️HA↘️ pekora arrows hahaha rabbit
+• dot circle separator
+「」 japanese quote square bracket
+¯\_(ツ)_/¯ shrug idk i dont know
+↵ enter key return
+𝕏  twitter x logo
+👉👈 etou ughhhhhhh shy
+👉👌 put it in imagination perv

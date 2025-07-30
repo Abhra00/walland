@@ -81,7 +81,7 @@ entry {
     background-color:            @background-alpha;
     text-color:                  inherit;
     cursor:                      text;
-    placeholder:                 "Select emoji";
+    placeholder:                 "Select emoji ✨";
     placeholder-color:           inherit;
 }
 
