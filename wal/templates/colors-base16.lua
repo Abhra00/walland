@@ -2,7 +2,7 @@ return {{
   base00 = "{background}",
   base01 = "{color0}",
   base02 = "#{color0.lighten(10%)}",
-  base03 = "{color8}",
+  base03 = "#{color0.lighten(20%)}",
   base04 = "{color7}",
   base05 = "{foreground}",
   base06 = "#{foreground.lighten(5%)}",
