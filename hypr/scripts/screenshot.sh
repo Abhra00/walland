@@ -15,6 +15,7 @@ dir="$(xdg-user-dir PICTURES)/Screenshots"
 file="Screenshot_${time}_${RANDOM}.png"
 
 notify_cmd_shot="notify-send -h string:x-canonical-private-synchronous:shot-notify -u low -i "$HOME"/.local/share/ss.sqre "Screenshot""
+notify_cmd_no_shot="notify-send -h string:x-canonical-private-synchronous:shot-notify -u low -i "bell" "Screenshot""
 
 active_window_class=$(hyprctl -j activewindow | jq -r '(.class)')
 active_window_file="Screenshot_${time}_${active_window_class}.png"
@@ -42,7 +43,7 @@ notify_view() {
             ${notify_cmd_shot} "Screenshot Saved."
             "${sDIR}/sounds.sh" --screenshot
         else
-            ${notify_cmd_shot} "Screenshot NOT Saved."
+            ${notify_cmd_no_shot} "Screenshot NOT Saved."
         fi
     fi
 }
