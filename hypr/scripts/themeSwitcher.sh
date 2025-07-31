@@ -46,7 +46,7 @@ rm -rf "${wall_selection_dir:?}"/*
 cp "$wall_collection_dir"/"$selected_theme"/* "$wall_selection_dir"
 
 # Set the theme using pywal
-wal --theme -f "$selected_theme_fpath" -o "$postrun_script"
+wal -e --theme -f "$selected_theme_fpath" -o "$postrun_script"
 
 # Set random wallpaper
 "${scriptsDir}"/randWall.sh
