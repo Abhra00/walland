@@ -1,0 +1,15 @@
+{%- for i in range(0, 16) %}
+]4;{{ i }};{{ colors["color" + i|string] }}\
+{%- endfor %}
+
+]10;{{ colors.foreground }}\
+]11;{{ colors.background }}\
+]12;{{ colors.cursor }}\
+]13;{{ colors.cursor_text or colors.foreground }}\
+]17;{{ colors.foreground }}\
+]19;{{ colors.background }}\
+]4;232;{{ colors.background }}\
+]4;256;{{ colors.foreground }}\
+]4;257;{{ colors.background }}\
+]708;{{ colors.background }}\
+
