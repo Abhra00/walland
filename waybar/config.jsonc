@@ -25,8 +25,8 @@
         "hyprland/workspaces"
     ],
     "modules-right": [
-        "memory",
         "cpu",
+        "memory",
         "backlight",
         "pulseaudio",
         "network",
@@ -123,11 +123,23 @@
       }
   },
   "cpu": {
-      "format": " {usage}%",
+      "interval": 1,
+      "format": "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}",
+      "format-icons": [
+          "<span color='$COLOR15'>▁</span>", // green
+          "<span color='$COLOR15'>▂</span>", // blue
+          "<span color='$COLOR15'>▃</span>", // white
+          "<span color='$COLOR15'>▄</span>", // white
+          "<span color='$COLOR15'>▅</span>", // yellow
+          "<span color='$COLOR15'>▆</span>", // yellow
+          "<span color='$COLOR15'>▇</span>", // orange
+          "<span color='$COLOR15'>█</span>"  // red
+      ],
       "tooltip": true
   },
   "memory": {
-      "format": " {}%"
+      "format": " {}%",
+      "tooltip": true,
   },
   "temperature": {
       "critical-threshold": 80,
@@ -135,9 +147,9 @@
       "format-icons": ["", "", ""]
   },
   "backlight": {
-    // "device": "acpi_video1",
-    "format": "{icon}{percent}%",
-    "format-icons": ["󱩏 ", "󱩑 ", "󱩓 ", "󱩕 "]
+    "format": "{icon} {percent}%",
+    "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"],
+    "tooltip": false
   },
   "battery": {
       "states": {

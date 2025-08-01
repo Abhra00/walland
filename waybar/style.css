@@ -19,7 +19,7 @@
 @define-color cyan 		@color14;
 
 * {
-    font-family: Iosevka Nerd Font Propo;
+    font-family: JetbrainsMono Nerd Font Propo;
     font-weight: 600;
     font-size: 14px;
 }
@@ -157,6 +157,7 @@ button {
 tooltip {
   background-color: @background;
   border: 2px solid @blue;
+  border-radius: 0px;
 }
 
 tooltip label {
