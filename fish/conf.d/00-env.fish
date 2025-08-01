@@ -8,9 +8,6 @@
 set -e fish_user_paths
 set -U fish_user_paths $HOME/.local/bin $HOME/.local/bin/statusbar $HOME/.local/bin/cron $HOME/Applications /var/lib/flatpak/exports/bin/ $fish_user_paths
 
-# Supresses fish's intro message
-set fish_greeting ""                               
-
 # Default programs
 set -gx EDITOR nvim
 set -gx TERMINAL foot
