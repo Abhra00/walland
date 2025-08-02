@@ -53,9 +53,18 @@ button {
 
 #workspaces button {
     padding: 0 5px;
-    color: @background-alt;
+    color: @foreground;
     margin: 4px 0 4px 6px;
     transition: color 200ms ease-in-out;
+}
+
+
+#workspaces button.empty {
+    color: @background-alt;
+}
+
+#workspaces button.visible {
+    color: @foreground;
 }
 
 
