@@ -74,7 +74,7 @@
       "format-disconnected": "Disconnected",
       "format-stopped": " Stopped",
       "unknown-tag": "N/A",
-      "title-len": 20,
+      "title-len": 40,
       "interval": 5,
       "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e rmpc'",
       "consume-icons": {
@@ -98,7 +98,7 @@
           "playing": "<span color=\"$COLOR10\"></span>"
       },
       "tooltip": true,
-      "tooltip-format": "  {volume}% 󰡎 {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}\n✨ {artist} ✨ {title}... ✨",
+      "tooltip-format": "  {volume}% 󰡎 {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}\n✨ {artist} ✨ {title} ✨",
       "tooltip-format-disconnected": "MPD (disconnected)"
   },
   "clock": {
