@@ -157,7 +157,7 @@
           "warning": 30,
           "critical": 15
       },
-      "tooltip": false,
+      "tooltip": true,
       "format": "{icon}{capacity}%",
       "format-full": "{icon}{capacity}%",
       "format-charging": " {capacity}%",
@@ -170,9 +170,6 @@
           " ",
           " "
       ]
-  },
-  "battery#bat2": {
-      "bat": "BAT2"
   },
   "power-profiles-daemon": {
       "format": "{icon}",
