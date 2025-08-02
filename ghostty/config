@@ -12,10 +12,9 @@ window-padding-x = 20
 window-padding-y = 20
 window-padding-balance = 1
 
-
 #---------Theme-----------#
 #-------------------------#
-theme = /home/bugs/.cache/wal/ghostty.conf
+theme = /home/bugs/.cache/wal/colors-ghostty-pywal.ghostty
 
 #---------Fonts----------#
 #------------------------#
