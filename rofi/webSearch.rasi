@@ -119,7 +119,7 @@ element {
     cursor:                      pointer;
 }
 element-text {
-    font:                        "JetbrainsMono Nerd Font Propo 28";
+    font:                        "GeistMono Nerd Font Propo 28";
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      inherit;

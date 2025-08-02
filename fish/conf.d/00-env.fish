@@ -10,7 +10,7 @@ set -U fish_user_paths $HOME/.local/bin $HOME/.local/bin/statusbar $HOME/.local/
 
 # Default programs
 set -gx EDITOR nvim
-set -gx TERMINAL foot
+set -gx TERMINAL ghostty
 set -gx LOCATION Memari
 set -gx BROWSER firefox
 

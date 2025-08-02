@@ -19,6 +19,11 @@ headerbar.default-decoration {
   margin-top: -100px;
 }
 
+*:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 window.csd,
 window.csd decoration {
   box-shadow: none;

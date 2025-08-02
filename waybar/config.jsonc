@@ -25,33 +25,42 @@
         "hyprland/workspaces"
     ],
     "modules-right": [
+        "group/tray-expander",
         "cpu",
         "memory",
         "backlight",
         "pulseaudio",
         "network",
+        "bluetooth",
         "battery",
-        "custom/swaync",
-        "tray"
+        "custom/swaync"
     ],
   // Modules configuration
 
   "hyprland/workspaces": {
-      "format": "{id}.{icon}",
+      "on-click": "activate",
+      "format": "{icon}",
       "format-icons": {
-          "1": "DEV",
-          "2": "DOC",
-          "3": "WEB",
-          "4": "IMG",
-          "5": "VFX",
-          "6": "SYS",
-          "7": "FUN",
-          "8": "CHAT",
-          "9": "MICS"
+          "default": "",
+          "1": "1",
+          "2": "2",
+          "3": "3",
+          "4": "4",
+          "5": "5",
+          "6": "6",
+          "7": "7",
+          "8": "8",
+          "9": "9",
+          "active": "󱓻"
       },
-      "all-outputs": true,
-      "persistent-workspaces": {}
-  },
+      "persistent-workspaces": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
+      }
+  },  
   "custom/pacman": {
       "interval": 3600,
       "return-type": "json",
@@ -61,40 +70,36 @@
       "signal": 8
   },
   "mpd": {
-      "format": " {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) :: {volume}%",
+      "format": "{stateIcon}[{elapsedTime:%M:%S}/{totalTime:%M:%S}]",
       "format-disconnected": "Disconnected",
       "format-stopped": " Stopped",
       "unknown-tag": "N/A",
-      "title-len": 30,
+      "title-len": 20,
       "interval": 5,
       "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e rmpc'",
       "consume-icons": {
-          "off": "<span color='$COLOR8'> </span> ",
-          "on": "<span color='$COLOR15'> </span> "
+          "off": "",
+          "on": " "
       },
       "random-icons": {
-          "off": "<span color='$COLOR8'> </span> ",
-          "on": "<span color='$COLOR15'> </span> "
+          "off": "",
+          "on": " "
       },
       "repeat-icons": {
-          "off": "<span color='$COLOR8'> </span> ",
-          "on": "<span color='$COLOR15'> </span> "
+          "off": "",
+          "on": "󱍷 "
       },
       "single-icons": {
-          "on": " 1",
-          "off": " 1"
+          "off": "",
+          "on": "󰲠 "
       },
       "state-icons": {
-          "paused": " ",
-          "playing": " "
+          "paused": "<span color=\"$COLOR15\"></span>",
+          "playing": "<span color=\"$COLOR10\"></span>"
       },
-      "tooltip": false,
-      "tooltip-format": "MPD (connected)",
+      "tooltip": true,
+      "tooltip-format": "  {volume}% 󰡎 {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}\n✨ {artist} ✨ {title}... ✨",
       "tooltip-format-disconnected": "MPD (disconnected)"
-  },
-  "tray": {
-      "tooltip": false,
-      "spacing": 10
   },
   "clock": {
       "tooltip": true,
@@ -123,89 +128,74 @@
       }
   },
   "cpu": {
-      "interval": 1,
-      "format": " {icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}",
-      "format-icons": [
-          "<span color='$COLOR15'>▁</span>", // green
-          "<span color='$COLOR15'>▂</span>", // blue
-          "<span color='$COLOR15'>▃</span>", // white
-          "<span color='$COLOR15'>▄</span>", // white
-          "<span color='$COLOR15'>▅</span>", // yellow
-          "<span color='$COLOR15'>▆</span>", // yellow
-          "<span color='$COLOR15'>▇</span>", // orange
-          "<span color='$COLOR15'>█</span>"  // red
-      ],
-      "tooltip": true
+      "interval": 5,
+      "format": "",
+      "on-click": "hyprctl dispatch exec '[float; size 1200 690]' '$TERMINAL -e btop'"
   },
   "memory": {
-      "format": " {}%",
+      "format": "",
+      "on-click": "hyprctl dispatch exec '[float; size 1200 690]' '$TERMINAL -e btop'",
       "tooltip": true,
-  },
-  "temperature": {
-      "critical-threshold": 80,
-      "format": "{temperatureC}°C {icon}",
-      "format-icons": ["", "", ""]
   },
   "backlight": {
-    "format": "{icon} {percent}%",
-    "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"],
-    "tooltip": false
+      "format": "{icon}",
+      "format-icons": ["", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
+      "tooltip": true,
+      "tooltip-format": "{icon} {percent}%",
   },
   "battery": {
-      "states": {
-          "good": 95,
-          "warning": 30,
-          "critical": 15
-      },
-      "tooltip": true,
-      "format": "{icon}{capacity}%",
-      "format-full": "{icon}{capacity}%",
-      "format-charging": " {capacity}%",
-      "format-plugged": " {capacity}%",
-      "format-alt": "{icon} {time}",
-      "format-icons": [
-          " ",
-          " ",
-          " ",
-          " ",
-          " "
-      ]
-  },
-  "power-profiles-daemon": {
-      "format": "{icon}",
-      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-      "tooltip": false,
+      "format": "{capacity}% {icon}",
+      "format-discharging": "{icon}",
+      "format-charging":    "{icon}",
+      "format-plugged":     "",
       "format-icons": {
-          "default": "",
-          "performance": "",
-          "balanced": " ",
-          "power-saver": " "
+          "charging": [
+              "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"
+          ],
+          "default": [
+              "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"
+          ]
+      },
+      "format-full": "󰂅",
+      "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
+      "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
+      "tooltip-format-plugged": "{timeTo} 󰡎  {capacity}%",
+      "interval": 5,
+      "states": {
+          "warning": 20,
+          "critical": 10
       }
   },
   "network": {
-      "format-wifi": " {essid} ({signalStrength}%)",
-      "format-ethernet": "{ipaddr}/{cidr} ",
-      "tooltip": false,
-      "tooltip-format": "{ifname} via {gwaddr}",
-      "format-linked": " {ifname} (No IP)",
-      "format-disconnected": " Disconnected",
-      "format-alt": "{ifname}: {ipaddr}/{cidr}",
-      "on-click-right": "$TERMINAL --title TermNmtui sh -c 'sleep 0.1; nmtui'"
+      "format-icons": ["󰤯","󰤟","󰤢","󰤥","󰤨"],
+      "format" : "{icon}",
+      "format-wifi" : "{icon}",
+      "format-ethernet" : "󰀂",
+      "format-disconnected" : "󰖪",
+      "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+      "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+      "tooltip-format-disconnected": "Disconnected",
+      "interval": 3,
+      "nospacing": 1,
+      "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e nmtui'"
+  },
+  "bluetooth": {
+    "format": "",
+    "format-disabled": "󰂲",
+    "format-connected": "",
+    "tooltip-format": "Devices connected: {num_connections}",
+    "on-click": "blueman-manager"
   },
   "pulseaudio": {
-    // "scroll-step": 1, // %, can be a float
-    "format": "{icon}{volume}% {format_source}",
-    "format-bluetooth": "{icon}{volume}%  {format_source}",
-    "format-bluetooth-muted": " {icon} {format_source}",
-    "format-muted": " {format_source}",
-    "format-source": " {volume}%",
-    "format-source-muted": " ",
-    "format-icons": {
-        "headphone": " ",
-        "headset": " ",
-        "default": [" ", " ", " "]
-    },
-    "on-click": "pavucontrol"
+      "format": "{icon}",
+      "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e wiremix'",
+      "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+      "tooltip-format": "Playing at {volume}%",
+      "scroll-step": 5,
+      "format-muted": "󰝟",
+      "format-icons": {
+          "default": ["", "", ""]
+      }
   },
   "custom/colorpicker": {
       "format": "{}",
@@ -215,7 +205,6 @@
       "on-click": "~/.config/waybar/scripts/colorpicker.sh",
       "signal": 1
   },
-
   "custom/swaync": {
       "tooltip": true,
       "tooltip-format": "Left Click: Launch Notification Center\nRight Click: Do not Disturb",
@@ -237,24 +226,23 @@
       "on-click-right": "swaync-client -d -sw",
       "escape": true
   },
-  "wlr/taskbar": {
-      "format": "{icon}",
-      "icon-size": 20,
-      "icon-theme": "Papirus",
-      "markup": true,
-      "tooltip": false,
-      "tooltip-format": "{title} ({state}",
-          "on-click": "activate",
-          "on-click-middle": "close",
-          "ignore-list": [
-              "Alacritty"
-          ],
-          "app_ids-mapping": {
-              "firefoxdeveloperedition": "firefox-developer-edition"
-          },
-          "rewrite": {
-              "Firefox Web Browser": "Firefox",
-              "Foot Server": "Terminal"
-          }
+  "group/tray-expander": {
+      "orientation": "inherit",
+      "drawer": {
+          "transition-duration": 600,
+          "children-class": "tray-group-item"
+      },
+      "modules": [
+          "custom/expand-icon",
+          "tray"
+      ]
+  },
+  "custom/expand-icon": {
+      "format": "",
+      "tooltip": false
+  },
+  "tray": {
+      "icon-size": 14,
+      "spacing": 10
   }
 }
