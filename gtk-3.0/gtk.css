@@ -29,6 +29,12 @@ window.csd decoration {
   box-shadow: none;
 }
 
+dialog, .dialog, window.dialog, .message-dialog {
+  border-radius: 0px;
+  border: none;
+  box-shadow: none;
+}
+
 tooltip {
   background-color: @card_bg_color; /* Change to desired background */
   border-radius: 6px;
