@@ -19,6 +19,7 @@
         "clock",
         "mpd",
         "custom/pacman",
+        "custom/weather",
         "custom/colorpicker"
     ],
     "modules-center": [
@@ -180,11 +181,11 @@
       "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e nmtui'"
   },
   "bluetooth": {
-    "format": "",
-    "format-disabled": "󰂲",
-    "format-connected": "",
-    "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "blueman-manager"
+      "format": "",
+      "format-disabled": "󰂲",
+      "format-connected": "",
+      "tooltip-format": "Devices connected: {num_connections}",
+      "on-click": "blueman-manager"
   },
   "pulseaudio": {
       "format": "{icon}",
@@ -225,6 +226,15 @@
       "on-click": "sleep 0.1 && swaync-client -t -sw",
       "on-click-right": "swaync-client -d -sw",
       "escape": true
+  },
+  "custom/weather": {
+      "format": "{}",
+      "format-alt": "{alt}: {}",
+      "format-alt-click": "click",
+      "interval": 3600,
+      "return-type": "json",
+      "exec": "$HOME/.config/waybar/scripts/weather.py",
+      "tooltip": true
   },
   "group/tray-expander": {
       "orientation": "inherit",
