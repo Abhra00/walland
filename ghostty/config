@@ -18,7 +18,7 @@ theme = /home/bugs/.cache/wal/colors-ghostty-pywal.ghostty
 
 #---------Fonts----------#
 #------------------------#
-font-family = "CaskaydiaCove Nerd Font"
+font-family = "IosevkaTerm Nerd Font"
 font-size = 16
 
 #---Shell Integration---#

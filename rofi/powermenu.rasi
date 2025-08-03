@@ -23,12 +23,12 @@ configuration {
     mainbox-margin:              150px 400px;
     message-margin:              0px 350px;
     message-padding:             15px;
-    message-border-radius:       15px;
+    message-border-radius:       0px;
     listview-spacing:            50px;
     element-padding:             35px 40px;
-    element-border-radius:       20px;
+    element-border-radius:       0px;
 
-    prompt-font:                 "CaskaydiaCove Nerd Font Propo 72";
+    prompt-font:                 "IosevkaTerm Nerd Font Propo 72";
     textbox-font:                "GeistMono Nerd Font Propo 14";
     element-text-font:           "GeistMono Nerd Font Propo 64";
 
