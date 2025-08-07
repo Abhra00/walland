@@ -28,7 +28,7 @@ configuration {
     element-padding:             35px 40px;
     element-border-radius:       0px;
 
-    prompt-font:                 "IosevkaTerm Nerd Font Propo 72";
+    prompt-font:                 "CaskaydiaCove Nerd Font Propo 72";
     textbox-font:                "GeistMono Nerd Font Propo 14";
     element-text-font:           "GeistMono Nerd Font Propo 64";
 
