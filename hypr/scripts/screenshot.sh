@@ -105,10 +105,10 @@ shotactive() {
     notify_view "active"
 }
 
-shotswappy() {
+shotsatty() {
     tmpfile=$(mktemp)
-    grim -g "$(slurp)" - >"$tmpfile" && "${sDIR}/sounds.sh" --screenshot && notify_view "swappy"
-    swappy -f - <"$tmpfile"
+    grim -g "$(slurp)" - >"$tmpfile" && "${sDIR}/sounds.sh" --screenshot
+    satty -f - <"$tmpfile"
     rm "$tmpfile"
 }
 
@@ -128,8 +128,8 @@ elif [[ "$1" == "--area" ]]; then
     shotarea
 elif [[ "$1" == "--active" ]]; then
     shotactive
-elif [[ "$1" == "--swappy" ]]; then
-    shotswappy
+elif [[ "$1" == "--satty" ]]; then
+    shotsatty
 else
     echo -e "Available Options : --now --in5 --in10 --win --area --active --swappy"
 fi
