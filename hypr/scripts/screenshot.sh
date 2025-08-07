@@ -35,7 +35,7 @@ notify_view() {
         else
             ${notify_cmd_shot} " Screenshot of '${active_window_class}'not Saved"
         fi
-    elif [[ "$1" == "swappy" ]]; then
+    elif [[ "$1" == "satty" ]]; then
         ${notify_cmd_shot} "Screenshot Captured."
     else
         local check_file="$dir/$file"
@@ -107,7 +107,7 @@ shotactive() {
 
 shotsatty() {
     tmpfile=$(mktemp)
-    grim -g "$(slurp)" - >"$tmpfile" && "${sDIR}/sounds.sh" --screenshot
+    grim -g "$(slurp)" - >"$tmpfile" && "${sDIR}/sounds.sh" --screenshot && magick "${tmpfile}" -strip -thumbnail 500x500^ -gravity center -extent 500x500 "$HOME/.local/share/ss.sqre" && notify_view "satty"
     satty -f - <"$tmpfile"
     rm "$tmpfile"
 }
@@ -131,7 +131,7 @@ elif [[ "$1" == "--active" ]]; then
 elif [[ "$1" == "--satty" ]]; then
     shotsatty
 else
-    echo -e "Available Options : --now --in5 --in10 --win --area --active --swappy"
+    echo -e "Available Options : --now --in5 --in10 --win --area --active --satty"
 fi
 
 exit 0
