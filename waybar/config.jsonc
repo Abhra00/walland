@@ -131,18 +131,18 @@
   "cpu": {
       "interval": 5,
       "format": "",
-      "on-click": "hyprctl dispatch exec '[float; size 1200 690]' '$TERMINAL -e btop'"
+      "on-click": "hyprctl dispatch exec '[float; size 1000 750]' '$TERMINAL -e btop'"
   },
   "memory": {
       "format": "",
-      "on-click": "hyprctl dispatch exec '[float; size 1200 690]' '$TERMINAL -e btop'",
-      "tooltip": true,
+      "on-click": "hyprctl dispatch exec '[float; size 1000 750]' '$TERMINAL -e btop'",
+      "tooltip": true
   },
   "backlight": {
       "format": "{icon}",
       "format-icons": ["", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
       "tooltip": true,
-      "tooltip-format": "{icon} {percent}%",
+      "tooltip-format": "{icon} {percent}%"
   },
   "battery": {
       "format": "{capacity}% {icon}",
