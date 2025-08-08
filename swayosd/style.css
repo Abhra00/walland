@@ -18,7 +18,7 @@ window {
 }
 
 label {
-  font-family: 'GeistMono Nerd Font Propo', monospace;
+  font-family: 'Iosevka Nerd Font Propo', monospace;
   font-size: 11pt;
   color: @foreground;
 }

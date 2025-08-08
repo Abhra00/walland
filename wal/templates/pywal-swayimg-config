@@ -75,7 +75,7 @@ fsmon = yes
 # Font configuration
 ################################################################################
 [font]
-name = GeistMono Nerd Font
+name = Iosevka Nerd Font
 size = 14
 color = {foreground}ff
 shadow = {background}d0
