@@ -17,7 +17,7 @@ add_newline = true
 
 # Directory
 [directory]
-style = 'fg:white'
+style = 'bright-purple'
 read_only = ' 󰌾 '
 truncation_length = 1
 truncation_symbol = ''
@@ -35,7 +35,7 @@ vimcmd_replace_symbol = '[󰂡](bold bright-purple)'
 
 # Git branch
 [git_branch]
-style = 'fg:bright-black'
+style = 'bright-purple'
 format = '[$symbol$branch(:$remote_branch)]($style) '
 
 # Git Status
