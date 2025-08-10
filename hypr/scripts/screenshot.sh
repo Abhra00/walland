@@ -7,7 +7,7 @@
 # /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Screenshots scripts
 
-iDIR="$HOME/.config/dunst/icons"
+iDIR="$HOME/.config/swaync/icons"
 sDIR="$HOME/.config/hypr/scripts"
 
 time=$(date "+%d-%b_%H-%M-%S")
