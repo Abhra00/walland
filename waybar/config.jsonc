@@ -71,7 +71,7 @@
       "signal": 8
   },
   "mpd": {
-      "format": "{stateIcon}[{elapsedTime:%M:%S}/{totalTime:%M:%S}]",
+      "format": "{stateIcon}[{elapsedTime:%H:%M:%S}/{totalTime:%H:%M:%S}]",
       "format-disconnected": "Disconnected",
       "format-stopped": " Stopped",
       "unknown-tag": "N/A",
