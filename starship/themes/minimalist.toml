@@ -1,0 +1,64 @@
+#  ┏┓┏┳┓┏┓┳┓┏┓┓┏┳┏┓
+#  ┗┓ ┃ ┣┫┣┫┗┓┣┫┃┃┃
+#  ┗┛ ┻ ┛┗┛┗┗┛┛┗┻┣┛
+# Pseudo minimalist starship prompt                  
+
+
+
+# The format of the prompt (left)
+format = """$directory$character"""
+
+# The format of the prompt (right)
+right_format = """$git_branch$git_status$git_state"""
+
+# whether to add a new line or not
+add_newline = true
+
+
+# Directory
+[directory]
+style = 'bright-purple'
+read_only = ' 󰌾 '
+truncation_length = 1
+truncation_symbol = ''
+truncate_to_repo = false
+
+# Character
+[character]
+success_symbol = '[󰘧](bold bright-white)'
+error_symbol = '[󰘧](bold bright-red)'
+vimcmd_symbol = '[󱃮](bold bright-white)'
+vimcmd_visual_symbol = '[󰀫](bold bright-yellow)'
+vimcmd_replace_one_symbol = '[󰂡](bold bright-purple)'
+vimcmd_replace_symbol = '[󰂡](bold bright-purple)'
+
+
+# Git branch
+[git_branch]
+style = 'bright-purple'
+format = '[$symbol$branch(:$remote_branch)]($style) '
+
+# Git Status
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+stashed = "[${count}*](fg:bright-green)" 
+modified = "[${count}+](fg:bright-yellow)" 
+deleted =  "[${count}-](fg:bright-red)" 
+conflicted =  "[${count}~](fg:bright-red)" 
+ahead = "⇡${count}"
+behind = "⇣${count}"
+untracked = "[${count}?](fg:bright-blue)" 
+staged = "[${count}+](fg:bright-green)" 
+
+# Git State
+[git_state]
+style =	"bold fg:bright-red"
+format = "[$state( $progress_current/$progress_total) ]($style)"
+rebase = "rebase"
+merge = "merge"	
+revert = "revert"	
+cherry_pick = "cherry"
+bisect = "bisect"	
+am = "am"	
+am_or_rebase = "am/rebase"
+
