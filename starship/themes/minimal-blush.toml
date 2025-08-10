@@ -126,7 +126,7 @@ disabled = false
 # Git Status
 [git_status]
 format = '( [\[$all_status$ahead_behind\]]($style))'
-style = "bold red"
+style = "red"
 stashed = "[${count}*](bright-green)" 
 modified = "[${count}+](bright-yellow)" 
 deleted =  "[${count}-](bright-red)" 
