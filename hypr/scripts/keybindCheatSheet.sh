@@ -4,55 +4,87 @@
 #  ┛┗┛┗┛┗┛┻┛┻┛┗┻┛  ┗┛┛┗┗┛┛┗ ┻ ┗┛┛┗┗┛┗┛ ┻
 #
 
-KEYBINDS_CONF="$HOME/.config/hypr/modules/keybinds.conf"
+# A script to display Hyprland keybindings defined in your configuration
+# using walker for an interactive search menu.
 
-# --- Load variable definitions from keybinds.conf ---
-# This will find all lines like `$var = something` and export them
-eval "$(
-    grep -E '^\$[a-zA-Z_][a-zA-Z0-9_]*\s*=' "$KEYBINDS_CONF" |
-        sed -E 's/^\$//; s/\s*=\s*/=/' |
-        while read -r line; do
-            key="${line%%=*}"
-            val="${line#*=}"
-            # If value starts with .config or config, prefix $HOME
-            if [[ "$val" =~ ^(\.config|config) ]]; then
-                val="$HOME/$val"
-            fi
-            echo "export $key=\"$val\""
-        done
-)"
+# Fetch dynamic keybindings from Hyprland
+#
+# Also do some pre-processing:
+# - Remove standard Omarchy bin path prefix
+# - Remove uwsm prefix
+# - Map numeric modifier key mask to a textual rendition
+# - Output comma-separated values that the parser can understand
+dynamic_bindings() {
+    hyprctl -j binds |
+        jq -r '.[] | {modmask, key, keycode, description, dispatcher, arg} | "\(.modmask),\(.key)@\(.keycode),\(.description),\(.dispatcher),\(.arg)"' |
+        sed -r \
+            -e 's/null//' \
+            -e 's,~/.local/share/omarchy/bin/,,' \
+            -e 's,uwsm app -- ,,' \
+            -e 's/@0//' \
+            -e 's/,@/,code:/' \
+            -e 's/^0,/,/' \
+            -e 's/^1,/SHIFT,/' \
+            -e 's/^4,/CTRL,/' \
+            -e 's/^5,/SHIFT CTRL,/' \
+            -e 's/^8,/ALT,/' \
+            -e 's/^9,/SHIFT ALT,/' \
+            -e 's/^12,/CTRL ALT,/' \
+            -e 's/^13,/SHIFT CTRL ALT,/' \
+            -e 's/^64,/SUPER,/' \
+            -e 's/^65,/SUPER SHIFT,/' \
+            -e 's/^68,/SUPER CTRL,/' \
+            -e 's/^69,/SUPER SHIFT CTRL,/' \
+            -e 's/^72,/SUPER ALT,/'
+}
 
-# --- Extract bind entries into a list ---
-mapfile -t BINDINGS < <(
-    grep -E '^\s*bind' "$KEYBINDS_CONF" |
-        sed -E 's/\s*#.*$//' |
-        awk -F, '{
-        for (i=1; i<=NF; i++) gsub(/^[ \t]+|[ \t]+$/, "", $i)
-        cmd = $3
-        for (i=4; i<=NF; i++) cmd = cmd " " $i
-        printf "<b>%s + %s</b>  <span color=\"gray\">%s</span>\n", $1, $2, cmd
-    }'
-)
+# Parse and format keybindings
+#
+# `awk` does the heavy lifting:
+# - Set the field separator to a comma ','.
+# - Joins the key combination (e.g., "SUPER + Q").
+# - Joins the command that the key executes.
+# - Prints everything in a nicely aligned format.
+parse_bindings() {
+    awk -F, '
+{
+    # Combine the modifier and key (first two fields)
+    key_combo = $1 " + " $2;
 
-# --- Show menu in rofi ---
-CHOICE=$(printf '%s\n' "${BINDINGS[@]}" | rofi -dmenu -theme "$HOME/.config/rofi/hyprCheatSheet.rasi" -markup-rows -i -p "Hyprland Keybinds:")
+    # Clean up: strip leading "+" if present, trim spaces
+    gsub(/^[ \t]*\+?[ \t]*/, "", key_combo);
+    gsub(/[ \t]+$/, "", key_combo);
 
-# --- Execute selected choice ---
-if [[ -n "$CHOICE" ]]; then
-    RAW_CMD=$(echo "$CHOICE" | sed -n 's/.*<span color="gray">\([^<]*\)<\/span>.*/\1/p')
+    # Use description, if set
+    action = $3;
 
-    # First pass: expand $variables from keybinds.conf
-    EXPANDED_CMD=$(eval "echo \"$RAW_CMD\"")
+    if (action == "") {
+        # Reconstruct the command from the remaining fields
+        for (i = 4; i <= NF; i++) {
+            action = action $i (i < NF ? "," : "");
+        }
 
-    # If path starts with .config or config, prefix with $HOME
-    if [[ "$EXPANDED_CMD" =~ ^(\.config|config) ]]; then
-        EXPANDED_CMD="$HOME/$EXPANDED_CMD"
-    fi
+        # Clean up trailing commas, remove leading "exec, ", and trim
+        sub(/,$/, "", action);
+        gsub(/(^|,)[[:space:]]*exec[[:space:]]*,?/, "", action);
+        gsub(/^[ \t]+|[ \t]+$/, "", action);
+        gsub(/[ \t]+/, " ", key_combo);  # Collapse multiple spaces to one
 
-    # Run command
-    if [[ "$EXPANDED_CMD" == exec* ]]; then
-        eval "${EXPANDED_CMD#exec }"
-    else
-        hyprctl dispatch "$EXPANDED_CMD"
-    fi
-fi
+        # Escape XML entities
+        gsub(/&/, "\\&amp;", action);
+        gsub(/</, "\\&lt;", action);
+        gsub(/>/, "\\&gt;", action);
+        gsub(/"/, "\\&quot;", action);
+        gsub(/'"'"'/, "\\&apos;", action);
+    }
+
+    if (action != "") {
+        printf "%-35s → %s\n", key_combo, action;
+    }
+}'
+}
+
+dynamic_bindings |
+    sort -u |
+    parse_bindings |
+    rofi -dmenu -i -p "keybindings:" -theme "$HOME/.config/rofi/hyprCheatSheet.rasi"
