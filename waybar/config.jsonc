@@ -120,11 +120,11 @@
           "weeks-pos"     : "left",
           "on-scroll"     : 1,
           "format": {
-              "months":     "<span color='$COLOR2'><b>{}</b></span>",
-              "days":       "<span color='$COLOR3'><b>{}</b></span>",
-              "weeks":      "<span color='$COLOR4'><b>W{}</b></span>",
-              "weekdays":   "<span color='$COLOR5'><b>{}</b></span>",
-              "today":      "<span color='$COLOR6'><b>{}</b></span>"
+              "months":     "<span font='Iosevka Nerd Font Propo 12' color='$COLOR2'><b>{}</b></span>",
+              "days":       "<span font='Iosevka Nerd Font Propo 12' color='$COLOR7'><b>{}</b></span>",
+              "weeks":      "<span font='Iosevka Nerd Font Propo 12' color='$COLOR4'><b>W{}</b></span>",
+              "weekdays":   "<span font='Iosevka Nerd Font Propo 12' color='$COLOR5'><b>{}</b></span>",
+              "today":      "<span font='Iosevka Nerd Font Propo 12' color='$COLOR5'><b>{}</b></span>"
           }
       }
   },
