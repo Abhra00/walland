@@ -1,41 +1,48 @@
 #!/usr/bin/env bash
-#  ┏┓┏┓┓ ┏┓┳┓┏┓┳┏┓┓┏┓┏┓┳┓
-#  ┃ ┃┃┃ ┃┃┣┫┃┃┃┃ ┃┫ ┣ ┣┫
-#  ┗┛┗┛┗┛┗┛┛┗┣┛┻┗┛┛┗┛┗┛┛┗
-#
+# ┏┓┏┓┓ ┏┓┳┓┏┓┳┏┓┓┏┓┏┓┳┓
+# ┃ ┃┃┃ ┃┃┣┫┃┃┃┃ ┃┫ ┣ ┣┫
+# ┗┛┗┛┗┛┗┛┛┗┣┛┻┗┛┛┗┛┗┛┛┗
 
-#!/bin/bash
+# Dependencies: hyprpicker, wl-copy, notify-send, Waybar (with signal support)
 
-# Dependencies: hyprpicker, wl-copy, notify-send, waybar listening on SIGRTMIN+1
-
-# Check if a command exists
-check() {
-    command -v "$1" >/dev/null
-}
-
-# Setup
+# Set up config/cache location
 loc="$HOME/.cache/colorpicker"
 mkdir -p "$loc"
 touch "$loc/colors"
 
+# Max number of colors to store
 limit=10
 
+# Helper to check if command exists
+check() {
+    command -v "$1" >/dev/null
+}
+
 # List saved colors
-[[ $# -eq 1 && $1 == "-l" ]] && {
+[[ "$1" == "-l" ]] && {
     cat "$loc/colors"
     exit
 }
 
 # Output for Waybar JSON module
-[[ $# -eq 1 && $1 == "-j" ]] && {
+[[ "$1" == "-j" ]] && {
     text="$(head -n 1 "$loc/colors")"
-    mapfile -t allcolors < <(tail -n +2 "$loc/colors")
-    tooltip="<b>   COLORS</b>\n\n"
-    tooltip+="-> <b>$text</b>  <span color='$text'></span>\n"
+    mapfile -t allcolors < <(tail -n +2 "$loc/colors" | sed '/^$/d')
 
-    for i in "${allcolors[@]}"; do
-        tooltip+="   <b>$i</b>  <span color='$i'></span>\n"
-    done
+    if [[ -z "$text" ]]; then
+        # No colors picked yet
+        text="#888888"
+        tooltip="No color chosen"
+    else
+        tooltip="<b>   COLORS</b>\\n\\n"
+        tooltip+="-> <b>$text</b>  <span color='$text'></span>\\n"
+
+        for i in "${allcolors[@]}"; do
+            tooltip+="   <b>$i</b>  <span color='$i'></span>\\n"
+        done
+
+        tooltip="${tooltip%\\n}" # Remove trailing newline
+    fi
 
     cat <<EOF
 { "text":"<span color='$text'></span>", "tooltip":"$tooltip" }
@@ -43,38 +50,38 @@ EOF
     exit
 }
 
-# Dependencies check
+# Pick color with hyprpicker
 check hyprpicker || {
     notify-send "Color Picker" "❌ hyprpicker is not installed" -u critical
     exit 1
 }
 
-killall -q hyprpicker
+killall -q hyprpicker 2>/dev/null
 
-# Pick color (force autoselect, no GUI if supported)
+# Pick color and trim newline
 color="$(hyprpicker -a | tr -d '\n')"
 
-# Validate hex color format
+# Validate color format
 [[ "$color" =~ ^#?[0-9a-fA-F]{6}$ ]] || {
     notify-send "Color Picker" "❌ Invalid color format: $color" -u critical
     exit 1
 }
 
-# Ensure leading '#' if missing
+# Ensure leading #
 [[ "$color" != \#* ]] && color="#$color"
 
-# Copy to clipboard if available
+# Copy to clipboard (if wl-copy is installed)
 check wl-copy && echo -n "$color" | wl-copy
 
-# Maintain unique, limited history
+# Save to history (deduplicated, limited)
 prevColors="$(grep -vFx "$color" "$loc/colors" | head -n $((limit - 1)))"
 {
     echo "$color"
     echo "$prevColors"
 } >"$loc/colors"
 
-# Send notification
+# Notification
 notify-send "Color Picker" "This color has been selected: $color" -i "$HOME/.local/share/bg.sqre"
 
-# Signal Waybar to update (requires `signal: 1` in Waybar module)
+# Signal Waybar to refresh
 pkill -RTMIN+1 waybar
