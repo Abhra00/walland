@@ -5,8 +5,6 @@
  *                    
  */
 
-
-
 @import url("../../.cache/wal/colors-gtk.css");
 
 .navigation-sidebar {
@@ -29,19 +27,30 @@ window.csd decoration {
   box-shadow: none;
 }
 
-dialog, .dialog, window.dialog, .message-dialog {
-  border-radius: 0px;
-  border: none;
-  box-shadow: none;
+*:selected {
+  color: @accent_fg_color;
+}
+
+dialog,
+window.dialog,
+.message-dialog,
+.dialog,
+window {
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 
 tooltip {
-  background-color: @card_bg_color; /* Change to desired background */
+  background-color: @card_bg_color;
+  /* Change to desired background */
   border-radius: 6px;
   padding: 6px 10px;
   border: 1px solid @accent_color;
 }
 
 tooltip.background label {
-  color: @card_fg_color;            /* Change to desired foreground */
+  color: @card_fg_color;
+  /* Change to desired foreground */
 }
