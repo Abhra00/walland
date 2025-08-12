@@ -78,8 +78,8 @@
                     (kind: Property(Status(StateV2(playing_label: " 󰐊 ", paused_label: " 󰏤 ", stopped_label: " 󰓛 "))), style: (fg: "{background}", bg: "{color13}", modifiers: "Bold")),
                 ],
                 center: [
-                    (kind: Text(" 󰎇 "),style: (fg: "{background}", bg: "{color12}", modifiers: "Bold")),
-                    (kind: Text(" "),style: (fg: "{background}", bg: "{color13}")),
+                    (kind: Text(" 󰎇 "), style: (fg: "{background}", bg: "{color12}", modifiers: "Bold")),
+                    (kind: Text(" "), style: (fg: "{background}", bg: "{color13}")),
                     (kind: Property(Song(Artist)), style: (fg: "{background}", bg: "{color13}", modifiers: "Bold"),
                         default: (kind: Text("Unknown"), style: (fg: "{background}", bg: "{color13}", modifiers: "Bold"))
                     ),
@@ -87,22 +87,22 @@
                     (kind: Property(Song(Title)), style: (fg: "{background}", bg: "{color13}", modifiers: "Bold"),
                         default: (kind: Text("No Song"), style: (fg: "{background}", bg: "{color13}", modifiers: "Bold"))
                     ),
-                    (kind: Text(" ["),style: (fg: "{background}", bg: "{color13}", modifiers: "Bold")),
+                    (kind: Text(" ["), style: (fg: "{background}", bg: "{color13}", modifiers: "Bold")),
 
-                    (kind: Property(Status(Elapsed)),style: (fg: "{background}", bg: "{color13}")),
+                    (kind: Property(Status(Elapsed)), style: (fg: "{background}", bg: "{color13}")),
 
-                    (kind: Text("/"),style: (fg: "{background}", bg: "{color13}", modifiers: "Bold")),
+                    (kind: Text("/"), style: (fg: "{background}", bg: "{color13}", modifiers: "Bold")),
 
                     (kind: Property(Status(Duration)),style: (fg: "{background}", bg: "{color13}")),
 
-                    (kind: Text(" 󱑽 "),style: (fg: "{background}", bg: "{color13}")),
+                    (kind: Text(" 󱑽 "), style: (fg: "{background}", bg: "{color13}")),
 
-                    (kind: Property(Status(Bitrate)),style: (fg: "{background}", bg: "{color13}")),
+                    (kind: Property(Status(Bitrate)), style: (fg: "{background}", bg: "{color13}")),
 
-                    (kind: Text(" kbps"),style: (fg: "{background}", bg: "{color13}")),
+                    (kind: Text(" kbps"), style: (fg: "{background}", bg: "{color13}")),
 
-                    (kind: Text("] "),style: (fg: "{background}", bg: "{color13}", modifiers: "Bold")),
-                    (kind: Text(" 󰎇 "),style: (fg: "{background}", bg: "{color12}", modifiers: "Bold")),
+                    (kind: Text("] "), style: (fg: "{background}", bg: "{color13}", modifiers: "Bold")),
+                    (kind: Text(" 󰎇 "), style: (fg: "{background}", bg: "{color12}", modifiers: "Bold")),
                 ],
                 right: [
                     (kind: Text("   "), style: (fg: "{background}", bg: "{color9}", modifiers: "Bold")),
