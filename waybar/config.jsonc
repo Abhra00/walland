@@ -77,7 +77,7 @@
       "unknown-tag": "N/A",
       "title-len": 40,
       "interval": 5,
-      "on-click": "hyprctl dispatch exec '[float]' '$TERMINAL -e rmpc'",
+      "on-click": "hyprctl dispatch exec '[float; size 1320 900]' '$TERMINAL -e rmpc'",
       "consume-icons": {
           "off": "",
           "on": " "
