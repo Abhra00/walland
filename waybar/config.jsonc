@@ -9,7 +9,6 @@
 
 // -*- mode: jsonc -*-
 {
-    "include": [ "$HOME/.cache/wal/colors.json" ],
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
     "height": 40, // Waybar height (to be removed for auto height)
