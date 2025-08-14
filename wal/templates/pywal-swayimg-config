@@ -75,7 +75,7 @@ fsmon = yes
 # Font configuration
 ################################################################################
 [font]
-name = Iosevka Nerd Font
+name = CaskaydiaCove Nerd Font
 size = 14
 color = {foreground}ff
 shadow = {background}d0

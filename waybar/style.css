@@ -6,74 +6,72 @@
  */
 
 /*-----------------Source pywal colors----------------*/
-@import url('../../.cache/wal/colors-waybar.css');
+@import url("../../.cache/wal/colors-waybar.css");
 
 /*------------Defining Colors---------------*/
-@define-color background-alt 	@color8;
-@define-color foreground-alt 	@background;
-@define-color red 		        @color9;
-@define-color green 		    @color10;
-@define-color yellow 		    @color11;
-@define-color blue 		        @color12;
-@define-color magenta 		    @color13;
-@define-color cyan 		        @color14;
+@define-color background-alt @color8;
+@define-color foreground-alt @background;
+@define-color red @color9;
+@define-color green @color10;
+@define-color yellow @color11;
+@define-color blue @color12;
+@define-color magenta @color13;
+@define-color cyan @color14;
 
 * {
-    font-family: Iosevka Nerd Font Propo, monospace;
-    font-weight: 600;
-    font-size: 14px;
+  font-family:
+    CaskaydiaCove Nerd Font Propo,
+    monospace;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 window#waybar {
-    background-color: @background;
-    color: @foreground;
-    transition-property: background-color;
-    transition-duration: .5s;
+  background-color: @background;
+  color: @foreground;
+  transition-property: background-color;
+  transition-duration: 0.5s;
 }
 
 window#waybar.hidden {
-    opacity: 0.2;
+  opacity: 0.2;
 }
-
 
 button {
-    box-shadow: inset 0 -3px transparent;
-    border: none;
-    border-radius: 0;
+  box-shadow: inset 0 -3px transparent;
+  border: none;
+  border-radius: 0;
 }
 
-
 #workspaces button:hover {
-    color: @magenta;
-    box-shadow: inherit;
-    text-shadow: inherit;
-    background: none;
-    border: none;
+  color: @magenta;
+  box-shadow: inherit;
+  text-shadow: inherit;
+  background: none;
+  border: none;
 }
 
 #workspaces button {
-    padding: 0 5px;
-    color: @foreground;
-    margin: 4px 0 4px 6px;
-    transition: color 200ms ease-in-out;
+  padding: 0 5px;
+  color: @foreground;
+  margin: 4px 0 4px 6px;
+  transition: color 200ms ease-in-out;
 }
 
-
 #workspaces button.empty {
-    color: @background-alt;
+  color: @background-alt;
 }
 
 #workspaces button.visible {
-    color: @foreground;
+  color: @foreground;
 }
 
-
 #workspaces button.active {
-    color: @foreground;
+  color: @foreground;
 }
 
 #workspaces button.urgent {
-    color: @red;
+  color: @red;
 }
 
 #clock,
@@ -92,21 +90,19 @@ button {
 #tray,
 #mode,
 #mpd {
-    padding: 0 9px;
-    color: @foreground;
-    border-radius: 15px;
-    margin: 5px 0;
+  padding: 0 9px;
+  color: @foreground;
+  border-radius: 15px;
+  margin: 5px 0;
 }
-
 
 #custom-pacman {
-    color: @yellow;
+  color: @yellow;
 }
-
 
 #window,
 #workspaces {
-    margin: 0 4px;
+  margin: 0 4px;
 }
 
 #clock {
@@ -114,7 +110,7 @@ button {
 }
 
 #custom-swaync {
-    color: @magenta;
+  color: @magenta;
 }
 
 #pulseaudio.muted {
@@ -126,17 +122,16 @@ button {
 }
 
 #battery {
-    color: @green;
+  color: @green;
 }
 
 #battery.warning:not(.charging) {
-    color: @red;
+  color: @red;
 }
 
 #custom-expand-icon:hover {
   color: @green;
 }
-
 
 tooltip {
   background-color: @background;
@@ -150,5 +145,5 @@ tooltip label {
 
 /* If workspaces is the leftmost module, reduce left margin */
 .modules-left > widget:first-child > #workspaces {
-    margin-left: 2px;
+  margin-left: 2px;
 }

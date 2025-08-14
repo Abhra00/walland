@@ -5,32 +5,30 @@
  *                           
  */
 
-
-
 /* Import pywal colors */
 @import "../../.cache/wal/colors-swayosd.css";
 
 /* Main css config */
 window {
-  border-radius: 0;
-  border: 2px solid @color8;
-  background-color: @background;
+    border-radius: 0;
+    border: 2px solid @color8;
+    background-color: @background;
 }
 
 label {
-  font-family: 'Iosevka Nerd Font Propo', monospace;
-  font-size: 11pt;
-  color: @foreground;
+    font-family: "CaskaydiaCove Nerd Font Propo", monospace;
+    font-size: 11pt;
+    color: @foreground;
 }
 
 image {
-  color: @color10;
+    color: @color10;
 }
 
 progressbar {
-  border-radius: 0;
+    border-radius: 0;
 }
 
 progress {
-  background-color: @color10;
+    background-color: @color10;
 }
