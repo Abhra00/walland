@@ -8,6 +8,7 @@
 wall_dir="$HOME/walls"
 scriptsDir="$HOME/.config/hypr/scripts"
 focused_monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
+materialYouScrPath="$HOME/.config/wal/material-you-tool/material-you.py"
 
 # Choose a random wallpaper
 wall=$(find "$wall_dir" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | shuf -n 1)
@@ -33,6 +34,19 @@ sleep 0.1 # Optional small delay
 
 # Set the wallpaper
 hyprctl hyprpaper wallpaper "$focused_monitor,$wall"
+
+# Check if the theme is material-you or not
+if [[ $(<~/.local/share/themeMode) == "material-you" ]]; then
+    python3 "${materialYouScrPath}" "${wall}"
+
+    # Optional: delay before theme script
+    sleep 0.2
+
+    # Run theme script
+    "$scriptsDir/magic.sh" "Material-You-Magick 💫"
+
+    exit 0
+fi
 
 # Optional: delay before theme script
 sleep 0.2

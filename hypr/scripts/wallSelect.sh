@@ -30,6 +30,7 @@
 wall_dir="$HOME/walls"
 cacheDir="$HOME/.cache/wallcache"
 scriptsDir="$HOME/.config/hypr/scripts"
+materialYouScrPath="$HOME/.config/wal/material-you-tool/material-you.py"
 
 # Create cache dir if not exists
 [ -d "$cacheDir" ] || mkdir -p "$cacheDir"
@@ -137,6 +138,19 @@ sleep 0.1 # Optional small delay
 
 # Set the wallpaper
 hyprctl hyprpaper wallpaper "$focused_monitor,${wallpaper_path}"
+
+# Check if the theme is material-you or not
+if [[ $(<~/.local/share/themeMode) == "material-you" ]]; then
+    python3 "${materialYouScrPath}" "${wallpaper_path}"
+
+    # Optional: delay before theme script
+    sleep 0.2
+
+    # Run theme script
+    "$scriptsDir/magic.sh" "Material-You-Magick 💫"
+
+    exit 0
+fi
 
 # Optional: delay before theme script
 sleep 0.2
