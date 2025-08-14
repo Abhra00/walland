@@ -10,7 +10,7 @@
 
 
 @define-color accent_color {color9};
-@define-color accent_bg_color {color10};
+@define-color accent_bg_color alpha({color10}, 0.7);
 @define-color accent_fg_color {background};
 
 @define-color destructive_color {color1};
