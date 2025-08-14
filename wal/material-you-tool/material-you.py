@@ -105,8 +105,8 @@ if __name__ == "__main__":
             "color2": colors.get("primary", "#00ff00"),
             "color3": colors.get("secondary", "#0000ff"),
             "color4": colors.get("tertiary", "#00ffff"),
-            "color5": blend_hex(colors.get("primary", "#00ff00"), "#9c27b0"), # magenta from primary+material-purple
-            "color6": blend_hex(colors.get("primary", "#00ff00"), "#00bcd4"), # cyan from primary+material-cyan
+            "color5": blend_hex(colors.get("primary", "#00ff00"), colors.get("tertiary", "#00ffff")), # magenta from primary+tertiary
+            "color6": blend_hex(colors.get("secondary", "#0000ff"), colors.get("tertiary", "#00ffff")), # cyan from secondary+tertiary
             "color7": colors.get("onSurfaceVariant", "#ffffff"),
 
             # Bright
@@ -115,8 +115,8 @@ if __name__ == "__main__":
             "color10": colors.get("primary", "#00ff00"),
             "color11": colors.get("secondary", "#0000ff"),
             "color12": colors.get("tertiary", "#00ffff"),
-            "color13": blend_hex(colors.get("primary", "#00ff00"), "#9c27b0"), # magenta from primary+material purple
-            "color14": blend_hex(colors.get("primary", "#00ff00"), "#00bcd4"), # cyan from primary+material-cyan
+            "color13": blend_hex(colors.get("primary", "#00ff00"), colors.get("tertiary", "#00ffff")), # magenta from primary+tertiary
+            "color14": blend_hex(colors.get("secondary", "#0000ff"), colors.get("tertiary", "#00ffff")), # cyan from secondary+tertiary
             "color15": colors.get("onSurface", "#ffffff"),
         }
     }
