@@ -63,7 +63,7 @@ temp_feel_text = f"Feels like {temp_feel}c"
 # Min / Max temperature
 temp_min = html_data("div[data-testid='wxData'] span[data-testid='TemperatureValue']").eq(1).text()
 temp_max = html_data("div[data-testid='wxData'] span[data-testid='TemperatureValue']").eq(0).text()
-temp_min_max = f"    {temp_min}\t\t {temp_max}"
+temp_min_max = f"    {temp_min}\t\t   {temp_max}"
 
 # Wind speed
 wind_speed = html_data("span[data-testid='Wind'] span").text()
@@ -71,7 +71,7 @@ wind_text = f" {wind_speed}"
 
 # Humidity
 humidity = html_data("span[data-testid='PercentageValue']").text()
-humidity_text = f"         {humidity}"
+humidity_text = f"           {humidity}"
 
 # Visibility
 visibility = html_data("span[data-testid='VisibilityValue']").text()
