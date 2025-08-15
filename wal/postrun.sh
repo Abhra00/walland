@@ -38,5 +38,8 @@ mkdir -p "${swayimgconf%/*}"
 mv -n "$swayimgconf" "$swayimgconf.bak"
 ln -sf "${XDG_CACHE_HOME:-$HOME/.cache}/wal/pywal-swayimg-config" "$swayimgconf"
 
+# Generate base16 nvim colors
+python3 "$HOME/.config/wal/generate-base16-nvimColors.py"
+
 # Refresh useful applications
 "$HOME"/.config/hypr/scripts/refresh.sh
