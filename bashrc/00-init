@@ -1,0 +1,19 @@
+# -----------------------------------------------------
+# INIT
+# -----------------------------------------------------
+
+# -----------------------------------------------------
+# Exports
+# -----------------------------------------------------
+export EDITOR=nvim
+export BROWSER=firefox
+export TERMINAL=kitty
+export PATH="$HOME/.local/bin/:$PATH"
+
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export KODI_DATA="$XDG_DATA_HOME/kodi"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
