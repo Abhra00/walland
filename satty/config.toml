@@ -6,12 +6,14 @@
 
 
 [general]
-
+# Save the file after pressing enter
+# [possible values: save-to-clipboard, save-to-file, exit]
+actions-on-enter = ["save-to-file"]
 
 # Font to use for text annotations
 [font]
 family = "CaskaydiaCove Nerd Font"
-style = "Oblique"
+style = "Regular"
 
 # Custom colours for the colour palette
 [color-palette]

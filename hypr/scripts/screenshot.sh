@@ -1,49 +1,73 @@
-#!/usr/bin/env bash
-#  ┏┓┏┓┳┓┏┓┏┓┳┓┏┓┓┏┏┓┏┳┓
-#  ┗┓┃ ┣┫┣ ┣ ┃┃┗┓┣┫┃┃ ┃
-#  ┗┛┗┛┛┗┗┛┗┛┛┗┗┛┛┗┗┛ ┻
-#
-
+#!/bin/bash
 # /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Screenshots scripts
 
-iDIR="$HOME/.config/swaync/icons"
-sDIR="$HOME/.config/hypr/scripts"
-
+# variables
 time=$(date "+%d-%b_%H-%M-%S")
 dir="$(xdg-user-dir PICTURES)/Screenshots"
 file="Screenshot_${time}_${RANDOM}.png"
 
-notify_cmd_shot="notify-send -h string:x-canonical-private-synchronous:shot-notify -u low -i "$HOME"/.local/share/ss.sqre "Screenshot""
-notify_cmd_no_shot="notify-send -h string:x-canonical-private-synchronous:shot-notify -u low -i "bell" "Screenshot""
+iDIR="$HOME/.config/swaync/icons"
+sDIR="$HOME/.config/hypr/scripts"
 
 active_window_class=$(hyprctl -j activewindow | jq -r '(.class)')
 active_window_file="Screenshot_${time}_${active_window_class}.png"
 active_window_path="${dir}/${active_window_file}"
 
+satty_file="Screenshot_${time}_satty.png"
+
+notify_cmd_base="notify-send -t 10000 -A action1=Open -A action2=Delete -h string:x-canonical-private-synchronous:shot-notify"
+notify_cmd_shot="${notify_cmd_base} -i ${iDIR}/ss.png"
+notify_cmd_shot_win="${notify_cmd_base} -i ${iDIR}/ss.png"
+notify_cmd_NOT="notify-send -u low -i ${iDIR}/bell.png"
+
 # notify and view screenshot
 notify_view() {
-
-    # make a square icon for using it as a notification-icon
-    sleep 0.5
-    magick "${dir}/${file}" -strip -thumbnail 500x500^ -gravity center -extent 500x500 "$HOME/.local/share/ss.sqre"
-
     if [[ "$1" == "active" ]]; then
         if [[ -e "${active_window_path}" ]]; then
-            ${notify_cmd_shot} " Screenshot of '${active_window_class}'Saved."
             "${sDIR}/sounds.sh" --screenshot
+            resp=$(timeout 5 ${notify_cmd_shot_win} " Screenshot of:" " ${active_window_class} Saved.")
+            case "$resp" in
+            action1)
+                xdg-open "${active_window_path}" &
+                ;;
+            action2)
+                rm "${active_window_path}" &
+                ;;
+            esac
         else
-            ${notify_cmd_shot} " Screenshot of '${active_window_class}'not Saved"
+            ${notify_cmd_NOT} " Screenshot of:" " ${active_window_class} NOT Saved."
+            "${sDIR}/sounds.sh" --error
         fi
+
     elif [[ "$1" == "satty" ]]; then
-        ${notify_cmd_shot} "Screenshot Captured."
+        "${sDIR}/sounds.sh" --screenshot
+        resp=$(${notify_cmd_shot} " Screenshot:" " Captured by Satty")
+        case "$resp" in
+        action1)
+            satty -f - -o ${dir}/${satty_file} <"$tmpfile"
+            ;;
+        action2)
+            rm "$tmpfile"
+            ;;
+        esac
+
     else
-        local check_file="$dir/$file"
+        local check_file="${dir}/${file}"
         if [[ -e "$check_file" ]]; then
-            ${notify_cmd_shot} "Screenshot Saved."
             "${sDIR}/sounds.sh" --screenshot
+            resp=$(timeout 5 ${notify_cmd_shot} " Screenshot" " Saved")
+            case "$resp" in
+            action1)
+                xdg-open "${check_file}" &
+                ;;
+            action2)
+                rm "${check_file}" &
+                ;;
+            esac
         else
-            ${notify_cmd_no_shot} "Screenshot NOT Saved."
+            ${notify_cmd_NOT} " Screenshot" " NOT Saved"
+            "${sDIR}/sounds.sh" --error
         fi
     fi
 }
@@ -51,7 +75,7 @@ notify_view() {
 # countdown
 countdown() {
     for sec in $(seq $1 -1 1); do
-        notify-send -h string:x-canonical-private-synchronous:shot-notify -t 1000 -i "$iDIR"/timer.png "Taking shot in : $sec"
+        notify-send -h string:x-canonical-private-synchronous:shot-notify -t 1000 -i "$iDIR"/timer.png " Taking shot" " in: $sec secs"
         sleep 1
     done
 }
@@ -68,7 +92,6 @@ shot5() {
     sleep 1 && cd ${dir} && grim - | tee "$file" | wl-copy
     sleep 1
     notify_view
-
 }
 
 shot10() {
@@ -87,11 +110,12 @@ shotwin() {
 shotarea() {
     tmpfile=$(mktemp)
     grim -g "$(slurp)" - >"$tmpfile"
+
+    # Copy with saving
     if [[ -s "$tmpfile" ]]; then
         wl-copy <"$tmpfile"
         mv "$tmpfile" "$dir/$file"
     fi
-    rm "$tmpfile"
     notify_view
 }
 
@@ -107,9 +131,13 @@ shotactive() {
 
 shotsatty() {
     tmpfile=$(mktemp)
-    grim -g "$(slurp)" - >"$tmpfile" && "${sDIR}/sounds.sh" --screenshot && magick "${tmpfile}" -strip -thumbnail 500x500^ -gravity center -extent 500x500 "$HOME/.local/share/ss.sqre" && notify_view "satty"
-    satty -f - <"$tmpfile"
-    rm "$tmpfile"
+    grim -g "$(slurp)" - >"$tmpfile"
+
+    # Copy without saving
+    if [[ -s "$tmpfile" ]]; then
+        wl-copy <"$tmpfile"
+        notify_view "satty"
+    fi
 }
 
 if [[ ! -d "$dir" ]]; then

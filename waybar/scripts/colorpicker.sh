@@ -81,7 +81,7 @@ prevColors="$(grep -vFx "$color" "$loc/colors" | head -n $((limit - 1)))"
 } >"$loc/colors"
 
 # Notification
-notify-send "Color Picker" "This color has been selected: $color" -i "$HOME/.local/share/bg.sqre"
+notify-send "Color Picker" "This color has been selected: $color" -i "$HOME/.config/swaync/icons/palette.png"
 
 # Signal Waybar to refresh
 pkill -RTMIN+1 waybar

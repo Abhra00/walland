@@ -27,25 +27,46 @@ window.csd decoration {
   box-shadow: none;
 }
 
-*:selected {
-  color: @accent_fg_color;
-}
+/* 🔒 Force square corners everywhere (Adw-GTK3 overrides) */
 
+/* Core dialogs and containers */
 dialog,
 window.dialog,
 .message-dialog,
 .dialog,
-window {
-  border-radius: 0 !important;
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
+messagedialog,
+.dialog-vbox,
+.dialog-action-area,
+.action-bar,
+popover,
+.popover,
+menu,
+.menu,
+.menubar,
+.context-menu,
+menuitem,
+.modelbutton,
+headerbar,
+.titlebar,
+infobar,
+.message-bar,
+.toast,
+dialog button,
+.dialog-action-area button,
+.action-bar button,
+menuitem,
+modelbutton,
+button {
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  outline: none;
 }
 
 tooltip {
   background-color: @card_bg_color;
   /* Change to desired background */
-  border-radius: 6px;
+  border-radius: 0px;
   padding: 6px 10px;
   border: 1px solid @accent_color;
 }

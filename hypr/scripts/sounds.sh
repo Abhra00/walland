@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 #  ┏┓┏┓┳┳┳┓┳┓┏┓┓┏┏┓┏┳┓
-#  ┗┓┃┃┃┃┃┃┃┃┗┓┣┫┃┃ ┃ 
-#  ┗┛┗┛┗┛┛┗┻┛┗┛┛┗┗┛ ┻ 
-#                     
-
+#  ┗┓┃┃┃┃┃┃┃┃┗┓┣┫┃┃ ┃
+#  ┗┛┗┛┗┛┛┗┻┛┗┛┛┗┗┛ ┻
+#
 
 # /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # This script is used to play system sounds.
@@ -31,6 +30,11 @@ elif [[ "$1" == "--volume" ]]; then
         exit 0
     fi
     soundoption="audio-volume-change.*"
+elif [[ "$1" == "--error" ]]; then
+    if [[ "$muteScreenshots" = true ]]; then
+        exit 0
+    fi
+    soundoption="dialog-error.*"
 else
     echo -e "Available sounds: --screenshot, --volume"
     exit 0
